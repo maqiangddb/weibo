@@ -17,12 +17,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <?php
         echo css_node('reset');
+        $ext = ON_SERVER ? 'css' : 'less';
         echo get_set($page['style'])? css_node($page['style'], 'less') : css_node('style', 'less');
         ?>
-        <script>
-            less = {};
-            less.env = 'development';
-        </script>
         <?php
         echo js_node('less-1.3.0.min');
         ?>
