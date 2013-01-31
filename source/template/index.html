@@ -7,7 +7,6 @@
  */
 
 $page['scripts'][] = js_node('page/index');
-
 ?>
 <div class="index">
     <?php if(!get_set($_SESSION['se_know_post'])) { ?>
@@ -22,11 +21,6 @@ $page['scripts'][] = js_node('page/index');
             <span class="name"><?php echo $scene_info['name']; ?></span>
             <span>：<?php echo $scene_info['description']; ?></span>
         </div>
-        <?php if ($scene_info['will_del']) { ?>
-        <span class="del">此场景已经被申请删除</span>
-        <?php } else { ?>
-        <a class="del" href="<?php echo $rooturl.'scene/'.$scene_info['id'].'?method=del'; ?>">申请删除</a>
-        <?php } ?>
     </div>
     <?php } ?>
     <?php if ($has_login && $reminds_count>0) { ?>
@@ -40,30 +34,39 @@ $page['scripts'][] = js_node('page/index');
     </div>
     <?php } ?>
     <?php if (get_set($_SESSION['se_role_id'])) { ?>
-    <form action="twit" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="scene" value="<?php echo $scene_id; ?>" />
-        <input type="hidden" name="method" value="post" />
-        <div class="post-form clear-fix">
-            <textarea name="text" placeholder="有什么需要表演的？"></textarea>
+    <div class="row-fluid">
+      <div class="span1">
+        <img class="img-polaroid" src="<?php echo $role_info['avatar'] ?>">
+      </div>
+      <div class="span11">
+        <form action="twit" method="post" enctype="multipart/form-data">
+          <input type="hidden" name="scene" value="<?php echo $scene_id; ?>" />
+          <input type="hidden" name="method" value="post" />
+          <div class="post-form clear-fix">
+            <textarea class="span12" name="text" placeholder="有什么需要表演的？"></textarea>
+            <input type="submit" class="btn btn-primary pull-right" value="发布" />
             <div><label>图片：</label><input type="file" name="image" /></div>
-            <input type="submit" value="发布" />
-        </div>
-    </form>
+          </div>
+        </form>
+      </div>
+    </div>
     <?php } else { ?>
     <div class="choose"><a href="<?php echo ROOT; ?>role">选择一个角色</a>，开始吧(选择完角色才能发言)。</div>
     <?php } ?>
     <a href="?" class="new-msg" style="display: none">有<span class="new-msg-num"></span>条新微博，点击查看</a>
     <div class="content-top">
+      <?php if (0): ?>
         <ul class="sort">
-            <li class="<?php echo ($control=='index')?'on':''; ?>"><a href="<?php echo $rooturl.'?scene='.$scene_id; ?>">时间线</a></li>
-            <li class="<?php echo ($control=='hot')?'on':''; ?>"><a href="<?php echo $rooturl.'hot?scene='.$scene_id; ?>">热度</a></li>
+          <li class="<?php echo ($control=='index')?'on':''; ?>"><a href="<?php echo $rooturl.'?scene='.$scene_id; ?>">时间线</a></li>
+          <li class="<?php echo ($control=='hot')?'on':''; ?>"><a href="<?php echo $rooturl.'hot?scene='.$scene_id; ?>">热度</a></li>
         </ul>
-        <?php if (0): ?>
+      <?php endif ?>
+      <?php if (1): ?>
         <div class="control">
-            <a href="<?php echo $rooturl.'scene'; ?>"  class="scene">场景列表</a>
-            <a href="<?php echo ROOT; ?>scene?method=add" >新增场景</a>
+          <a href="<?php echo $rooturl.'scene'; ?>"  class="scene btn">场景列表</a>
+          <a href="<?php echo ROOT; ?>scene?method=add" class="btn">新增场景</a>
         </div>
-        <?php endif; ?>
+      <?php endif; ?>
     </div>
     <div class="scene-twit">
         <ul class="twit">
@@ -71,7 +74,7 @@ $page['scripts'][] = js_node('page/index');
             <?php include _block('twit'); ?>
             <?php } ?>
         </ul>
-        <ul class="scene">
+        <ul class="scene nav nav-pills nav-stacked">
             <li class="<?php echo empty($scene_id)?'on':''; ?>"><a href="?">所有场景</a></li>
             <?php foreach ($scenes as $s) { ?>
             <li class="<?php echo $scene_id==$s['id']?'on':''; ?>"><a href="?scene=<?php echo $s['id']; ?>"><?php echo $s['name']; ?></a></li>

@@ -46,30 +46,6 @@ $(function () {
         ].join(' ');
     };
 
-    // 每隔60秒检测有无新微博 改成30秒
-    var start = (new Date()).getTime(); // millisecond
-    var intervalMil = 30 * 1000;
-    setTimeout(function () {
-        (function heartBeat() {
-            var twitUrl = G.ROOT_URL+'twit';
-            var d = (new Date()).getTime() - start;
-            $.get(twitUrl, {
-                method: 'count',
-                interval: Math.floor(d / 1000) // 多少秒之前？
-            }, function (ret) {
-                var num = ret.num;
-                if (num > 0) {
-                    $('.new-msg-num').text(num);
-                    $('.new-msg').show();
-                }
-            }, 'json');
-            setTimeout(heartBeat, intervalMil);
-        })();
-    }, intervalMil);
-
-
-    // 查看新微博
-
     // 所有的转发框和评论框都有at功能
     $('.post-comment-form textarea, .retweet-form textarea, .post-form textarea').atBox();
 

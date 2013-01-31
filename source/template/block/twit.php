@@ -14,11 +14,6 @@
         <span class="scene">场景：<a href="<?php echo '?scene='.$t['scene_id']; ?>"><?php echo $t['scene']; ?></a></span>
         <?php } ?>
         <span class="time"><?php echo $t['time']; ?></span>
-        <?php if ($t['will_del']) { ?>
-        <span class="del">这条伪博已经被申请删除</span>
-        <?php } else { ?>
-        <a class="del" href="<?php echo $rooturl.'twit/'.$t['id'].'?method=del'; ?>">申请删除</a>
-        <?php } ?>
         <a href="<?php echo $rooturl.'twit/'.$t['id']; ?>">分享</a>
         <?php if (0) { ?>
         <?php if ($t['can_up']) { ?>
@@ -38,8 +33,8 @@
         <form class="retweet" method="post" action="<?php echo ROOT.'twit/'.$t['id']; ?>">
             <input type="hidden" name="method" value="retweet" />
             <div class="retweet-form">
-                <textarea name="text" placeholder="说点什么吧"></textarea>
-                <input type="submit" value="转发" />
+                <textarea name="text" placeholder="说点什么吧" class="span12"></textarea>
+                <input type="submit" value="转发" class="btn" />
             </div>
         </form>
     </div>

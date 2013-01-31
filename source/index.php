@@ -7,6 +7,10 @@
  * 此框架由王霄池纯粹手写而成，当然参照了不少鸡爷的框架
  */
 
+// 打开错误提示
+ini_set('display_errors', 1); // 在 SAE 上 ini_set() 不起作用，但也不会报错
+error_reporting(E_ALL);
+
 define('IN_KC', 1);
 
 require 'lib.php';
@@ -37,5 +41,3 @@ if (isset($force_redirect)) { // 强制跳转 这个在整站关闭的时候也�
     $template = 'template/page404.php';
 }
 include 'template/master.php';
-
-?>

@@ -245,7 +245,13 @@ function redirect($url='/') {
 }
 
 function _tpl ($file_name) { // 漏洞？  还有，目录名是否可以变得更简便？
-    return 'template/'.$file_name.'.php';
+    $php_file = 'template/'.$file_name.'.php';
+    $html_file = 'template/'.$file_name.'.html';
+    if (file_exists($php_file)) {
+        return $php_file;
+    } else {
+        return $html_file;
+    }
 }
 
 function _src ($file_name) {

@@ -6,8 +6,8 @@
  * @created
  */
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>伪博扮演</title>
@@ -16,12 +16,9 @@
         <meta name="keywords" content="<?php echo implode(', ', get_set($page['keywords'], array())); ?>" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <?php
-        echo css_node('reset');
-        $ext = ON_SERVER ? 'css' : 'less';
-        echo get_set($page['style'])? css_node($page['style'], 'less') : css_node('style', 'less');
-        ?>
-        <?php
-        echo js_node('less-1.3.0.min');
+        echo css_node('bootstrap');
+        $ext = 'css';// ON_SERVER ? 'css' : 'less';
+        echo get_set($page['style'])? css_node($page['style'], $ext) : css_node('style', $ext);
         ?>
         <?php if (ON_SERVER): ?>
         <script type="text/javascript">

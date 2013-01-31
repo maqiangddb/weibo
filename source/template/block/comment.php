@@ -11,10 +11,10 @@
     <?php if ($role_id): ?>
     <form class="post-comment" method="post" action="<?php echo ROOT.'twit/'.$t['id']; ?>">
         <input type="hidden" name="method" value="comment" />
-        <div class="comment-form">
+        <div class="comment-form row-fluid">
             <img class="avatar" src="<?php echo $role_info['avatar']; ?>" />
-            <textarea name="text" placeholder="说点什么吧"></textarea>
-            <input type="submit" value="评论" />
+            <textarea name="text" placeholder="说点什么吧" class="span12"></textarea>
+            <input type="submit" value="评论" class="btn" />
         </div>
     </form>
     <?php else: ?>

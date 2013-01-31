@@ -83,6 +83,9 @@ body {
   padding: 10px;
   text-align: center;
 }
+.footer ul {
+  list-style: none;
+}
 .clear-fix:after {
   content: "";
   display: block;
@@ -290,24 +293,6 @@ div.twit div.comment .comment-form .avatar,
 li.twit div.comment .comment-form input,
 div.twit div.comment .comment-form input {
   display: none;
-}
-li.twit div.comment .comment-form input,
-div.twit div.comment .comment-form input {
-  cursor: auto;
-  border: 1px solid #666;
-  border-radius: 4px;
-  background-color: #ccc;
-  padding: 5px 10px;
-  border-radius: 0 0 4px 4px;
-}
-li.twit div.comment .comment-form input:hover,
-div.twit div.comment .comment-form input:hover {
-  cursor: pointer;
-}
-li.twit div.comment .comment-form input:hover,
-div.twit div.comment .comment-form input:hover {
-  background-color: #fff;
-  cursor: pointer;
 }
 li.twit div.comment .comment-form.on .avatar,
 div.twit div.comment .comment-form.on .avatar {
@@ -666,59 +651,6 @@ div.scene-list li a.goto {
 .index .choose a {
   color: blue;
 }
-.index .post-form {
-  background-color: #FFFFFF;
-  border-bottom: 2px solid #E2E2E9;
-  border-radius: 3px 3px 3px 3px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-  margin: auto;
-  padding: 10px 0;
-  border-bottom: 1px solid #E2E2E2;
-}
-.index .post-form textarea {
-  border: 1px solid #999;
-  color: #aaa;
-  display: block;
-  margin: auto;
-  width: 98%;
-  font-size: 18px;
-}
-.index .post-form textarea:hover {
-  border-color: #666;
-}
-.index .post-form textarea:focus {
-  border-color: #666;
-  color: #333;
-}
-.index .post-form input[type=submit] {
-  cursor: auto;
-  border: 1px solid #666;
-  border-radius: 4px;
-  background-color: #ccc;
-  padding: 5px 10px;
-  float: right;
-  width: 4em;
-  font-size: 28px;
-}
-.index .post-form input[type=submit]:hover {
-  cursor: pointer;
-}
-.index .post-form input[type=submit]:hover {
-  background-color: #fff;
-  cursor: pointer;
-}
-.index .post-form .pop-panel {
-  border: 1px solid #555;
-  width: 340px;
-}
-.index .post-form .pop-panel li {
-  border-left: 3px solid #666;
-  margin: 5px;
-}
-.index .post-form .pop-panel li:hover {
-  cursor: pointer;
-  background-color: #ddd;
-}
 .index .new-msg {
   display: block;
   background-color: #FfFeE2;
@@ -788,6 +720,7 @@ div.scene-list li a.goto {
   background-color: #AEAEAE;
 }
 .index div.scene-twit ul.twit {
+  list-style-type: none;
   margin: auto;
   padding: 10px 0;
 }
