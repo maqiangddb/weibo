@@ -8,13 +8,9 @@
  * config of server
  */
 
-if (ON_SERVER) {
-    define('DEBUG', FALSE);
-    define('ROOT', '/');
-}
 $config['version'] = array(
-    'js'=>'12-09-17',
-    'css'=>'12-10-10a',
+    'js'=>'13-1-31',
+    'css'=>'13-1-31',
 );
 $config['up_domain'] = 'wbbystatic';
 
@@ -28,5 +24,3 @@ $config['db'] = array(
 // rely on sever
 $config['default_avatar'] = ROOT . 'img/default_avatar.png';
 $config['qq_login']['callback'] = 'http://weibobanyan.sinaapp.com/login';
-
-?>

@@ -15,6 +15,9 @@ if (isset($_SERVER['HTTP_APPNAME'])) {
 if (!ON_SERVER) { // server中的配置不同
     define('DEBUG', TRUE);
     define('ROOT', '/');
+} else {
+    define('DEBUG', FALSE);
+    define('ROOT', '/');
 }
 
 $config['db'] = array(
@@ -55,5 +58,3 @@ $config['default_avatar'] = ROOT . 'img/default_avatar.png';
 $ip_ban = array(
 //    '121.0.29.193', // 我是苍井空
 );
-
-?>

@@ -69,13 +69,13 @@ div.avatar {
   margin-bottom: 10px;
 }
 body {
-  background-color: #e0e0e0;
+  background-color: #f0f0f0;
 }
 .footer {
   margin: 10px 0;
   font-size: small;
   opacity: 0.7;
-  background-color: #e0e0e0;
+  background-color: #f0f0f0;
   clear: both;
 }
 .footer .c {
@@ -101,6 +101,7 @@ body {
 ul.comment {
   clear: both;
   padding-top: 10px;
+  margin-left: 0;
 }
 ul.comment li.comment {
   padding: 5px;
@@ -599,6 +600,16 @@ div.scene-list li a.goto {
     width: 600px;
     margin: auto;
   }
+}
+.high {
+  padding: 5px;
+  border: 1px solid #CAC5C5;
+  background-color: #fff;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+ul.twit {
+  list-style-type: none;
 }
 .index div.post {
   background-color: #FFFFFF;
