@@ -14,13 +14,13 @@ if (isset($_SERVER['HTTP_APPNAME'])) {
 
 if (!ON_SERVER) { // server中的配置不同
     define('DEBUG', TRUE);
-    define('ROOT', '/weibo/');
+    define('ROOT', '/');
 }
 
 $config['db'] = array(
     'dsn' => 'mysql:host=localhost;dbname=weibo',
     'username' => 'root',
-    'pwd' => 'xiaosan'
+    'pwd' => 'root'
 );
 
 // === 以下，大部分，server 和 local 相同

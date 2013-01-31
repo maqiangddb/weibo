@@ -66,7 +66,7 @@ class Twit {
             'twit.id=comment.twit'=>false,
             'role.id=comment.author'=>false,
         );
-        $orders = array('`comment`.`time` DESC');
+        $orders = array('`comment`.`time` ASC');
         return array_map(function ($comment) {
             $comment['text'] = Twit::addLink($comment['text']);
             return $comment;

@@ -59,5 +59,3 @@ if ($has_login) {
 $page['scripts'][] = js_node('jquery.form');
 $page['scripts'][] = js_node('widget');
 $page['style'] = 'index';
-
-?>
