@@ -25,7 +25,7 @@ switch ($method) {
             if ($name) {
                 require_once _class('Scene');
                 Scene::creat($name, $description);
-                redirect($rooturl); // config root url=>rooturl
+                redirect($rooturl.'scene'); // config root url=>rooturl
             }
         }
         break;

@@ -11,7 +11,6 @@ if ($validate_role) {
     $page['scripts'][] = js_node('widget');
     $page['scripts'][] = js_node('page/index');
 }
-
 ?>
 <?php if (get_set($validate_role)) { ?>
 <div class="role-info">
@@ -66,7 +65,7 @@ $page['scripts'][] = js_node('page/add_search_role');
             <div class="search-add-role-form">
                 <label>角色名称：</label>
                 <input type="text" name="name" />
-                <input type="submit" value="添加角色" class="" style="display: none" />
+                <input type="submit" value="添加角色" class="btn" style="display: none" />
                 <ul class="role-list" style="display: none"></ul>
             </div>
         </form>

@@ -10,5 +10,6 @@
     </a>
     <span>：</span>
     <span><?php echo $c['text']; ?></span>
+    <span class="pull-right time"><?php echo $c['time'] ?></span>
 </li>
 <?php } ?>

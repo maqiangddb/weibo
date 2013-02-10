@@ -55,6 +55,7 @@ class Twit {
         //....
         $fields = array(
             'comment.text',
+            'comment.time',
             'role.name as author',
             'role.id as author_id',
             'role.avatar',

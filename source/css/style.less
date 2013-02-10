@@ -116,6 +116,10 @@ ul.comment {
     li.comment {
         padding: 5px;
         overflow: hidden;
+        span.time {
+            color: #ddd;
+            font-size: small;
+        }
     }
 }
 
@@ -320,8 +324,9 @@ li.twit:hover .del {
     .search-add-role-form {
         .box-bg;
         ul.role-list {
+
             li {
-                margin-left: 5em;
+                
                 a {
                     display: block;
                     padding: 10px;
@@ -338,7 +343,7 @@ li.twit:hover .del {
     dl {
         .box-bg;
         dt {
-            font-size: 32px;
+            font-size: 22px;
         }
         dd {
             border-left: 3px solid #555;
@@ -364,13 +369,23 @@ li.twit:hover .del {
 
 }
 
+ul.role-list {
+    list-style-type: none;
+    margin-left: 0;
+    
+}
+
 a.del {
     color: red;
 }
 div.tag {
+
     clear: both;
     ul {
+        margin-left: 0;
+        list-style-type: none;
         li {
+            margin-left: 0;
             float: left;
             a, span {
                 display: block;
@@ -392,6 +407,9 @@ div.tag {
 }
 
 div.scene-list {
+    ul {
+        list-style-type: none;
+    }
     li {
         background-color: #E3E6F8;
         border: 1px solid #0C14A0;
