@@ -19,6 +19,7 @@ switch ($method) {
     case 'add':
         $template = _tpl('scene_add_edit');
         $btn_caption = '创建场景';
+        $description = '';
         if ($is_post) {
             extract(user_input($_POST, array('name', 'description')));
             if ($name) {
@@ -62,7 +63,5 @@ switch ($method) {
 }
 
 if (!$validate_scene) {
-    $scenes = Scene::ListS();
+    $scenes = Scene::ListS(array('num' => 1000));
 }
-
-?>
