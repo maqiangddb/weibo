@@ -20,9 +20,11 @@ switch (get_set($_REQUEST['method'])) {
     case 'post': // add
         extract(user_input($_POST, array('text', 'scene')));
         $image = get_set($_FILES['image']);
-        if ($text || get_set($image['name'])) {
+        $image = get_set($image['name']);
+        if ($text || ($image)) {
             $role = new Role($role_id);
-            $image_path = $image? make_image($image) : '';
+            $image_path = $image? make_image('image') : '';
+            
             $role->tweet($text, $image_path, $scene);
         }
         redirect('index?scene='.$scene);

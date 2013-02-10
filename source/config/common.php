@@ -8,8 +8,10 @@
 
 if (isset($_SERVER['HTTP_APPNAME'])) {
     define('ON_SERVER', TRUE);
+    define('ON_SAE', 1);
 } else {
     define('ON_SERVER', FALSE);
+    define('ON_SAE', 0);
 }
 
 if (!ON_SERVER) { // server中的配置不同

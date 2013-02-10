@@ -32,7 +32,7 @@ if ($validate_role) {
         <form action="<?php echo $base_url.$info['id']; ?>" method="post">
             <input type="hidden" name="method" value="add_tag" />
             <div class="add-tag-form">
-                <input type="text" name="text" /><input type="submit" value="添加标签" />
+                <input type="text" name="text" /><input type="submit" value="添加标签" class="btn" />
             </div>
         </form>
     </div>
@@ -41,7 +41,7 @@ if ($validate_role) {
         <div class="edit-role-form">
             <div><input type="checkbox" id="is_v" name="is_v" <?php echo $info['is_v']? 'checked':''; ?> /><label for="is_v">加V认证</label></div>
             <div><label>头像：</label><input type="file" name="avatar" /></div>
-            <input type="submit" value="更改" />
+            <input type="submit" value="更改" class="btn" />
         </div>
     </form>
 

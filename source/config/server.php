@@ -10,7 +10,7 @@
 
 $config['version'] = array(
     'js'=>'13-1-31',
-    'css'=>'13-1-31',
+    'css'=>'13-2-10',
 );
 $config['up_domain'] = 'wbbystatic';
 

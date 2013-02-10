@@ -117,8 +117,6 @@ function d($param, $var_dump=0) {
     }
 }
 
-
-
 function user_input($arr, $para_list) {
     if (!is_array($para_list)) {
         $para_list = array($para_list);
@@ -130,11 +128,25 @@ function user_input($arr, $para_list) {
     return $ret;
 }
 
+
+/* image upload helpers */
+
+/**
+ * what is this?
+ * @param type $file_content
+ * @param type $crop
+ * @param type $width
+ * @param type $height
+ * @param type $new_width
+ * @param type $new_height
+ * @return type
+ * @throws Exception
+ */
 function image_resize ($file_content, $crop, $width, $height, $new_width, $new_height) {
     if ($new_width < 1 || $new_height < 1) {
         throw new Exception('specified size too small');
     } else if ($width<$new_width || $height<$new_height) {
-        throw new Exception('too small');
+        throw new Exception('image size too small', 42);
     } else {
         $dst = imagecreatetruecolor($new_width, $new_height);
         $src_x = 0;
@@ -143,93 +155,158 @@ function image_resize ($file_content, $crop, $width, $height, $new_width, $new_h
             $ratio = $width / $height;
             $new_ratio = $new_width / $new_height;
             if ($ratio > $new_ratio) {
+                $old_width = $width;
                 $width = ceil($new_ratio * $height);
+                $src_x = ($old_width - $width) / 2;
             } else if ($ratio < $new_ratio) {
+                $old_height = $height;
                 $height = ceil($width / $new_ratio);
+                $src_y = ($old_height - $height) / 2;
             }
         }
-        imagecopyresampled($dst, $file_content, 0, 0, $src_x, $src_y, $new_width, $new_height, $width, $height);
+        $s = imagecopyresampled($dst, $file_content, 0, 0, $src_x, $src_y, $new_width, $new_height, $width, $height);
         return $dst;
     }
 }
 
-/**
- *
- * @param type $image
- * @param type $para resize crop width height
- * @return string
- * @throws Exception
- */
-function make_image($image, $para=array()) {
-    $para = array_merge(array(
+function image_file_resize($tmp_img_file, $image_type, $crop, $new_width, $new_height) {
+    list($width, $height) = getimagesize($tmp_img_file);
+    $image_type_map = array(
+        'jpg' => 'jpeg',
+        'jpeg' => 'jpeg',
+        'pjpeg' => 'jpeg',
+        'png' => 'png',
+        'x-png' => 'png');
+    $image_type = strtolower($image_type);
+    if (isset($image_type_map[$image_type]))
+        $image_type = $image_type_map[$image_type];
+    $src = call_user_func('imagecreatefrom' . $image_type, $tmp_img_file);
+    try {
+        $dst = image_resize($src, $crop, $width, $height, $new_width, $new_height);
+    } catch (Exception $e) {
+        throw $e;
+    }
+
+    ob_start();
+    call_user_func('image' . $image_type, $dst);
+    $ret = ob_get_contents();
+    ob_end_clean();
+    return $ret;
+}
+
+// from file
+function make_image2($imagefile, $opt = array())
+{
+    // deault option
+    $opt = array_merge(array(
         'crop' => 0,
         'resize' => 0,
         'width' => 50,
         'height' => 50,
-    ), $para);
-    $type = reset(explode('/', $image['type']));
-    if ($type == 'image') {
-        $arr = explode('.', $image['name']);
-        if (count($arr) < 2) {
-            throw new Exception('file name: '.$image['name']);
-        }
-        $extention = end($arr);
-        $file_name = uniqid().'.'.$extention;
-        $tmp_img = $image["tmp_name"];
-        // resize and more
-        if ($para['resize']) {
-            list($width, $height) = getimagesize($tmp_img);
-            $image_type = end(explode('/', $image['type']));
-            switch ($image_type) {
-                case 'jpeg':
-                    $src = imagecreatefromjpeg($tmp_img);
-                    $dst = image_resize($src, $para['crop'], $width, $height, $para['width'], $para['height']);
-                    imagejpeg($dst, $tmp_img);
-                    break;
-                case 'png':
-                    $src = imagecreatefrompng($tmp_img);
-                    $dst = image_resize($src, $para['crop'], $width, $height, $para['width'], $para['height']);
-                    imagepng($dst, $tmp_img);
-                    break;
-                case 'gif': // ??
-                    $src = imagecreatefromgif($tmp_img);
-                    $dst = image_resize($src, $para['crop'], $width, $height, $para['width'], $para['height']);
-                    imagegif($dst, $tmp_img);
-                    break;
-                default :
-                    break;
-            }
-        }
-        $content = file_get_contents($tmp_img);
+        'list' => null,
+    ), $opt);
+    
+    $extention = $image_type = end(explode('.', $imagefile));
 
-        global $config; // TODO
-        global $root_path;
-        if (ON_SERVER) {
-            $up_domain = $config['up_domain'];
-            $s = new SaeStorage();
-            $s->write($up_domain , $file_name , $content);
-            unlink($tmp_img);
-            return $s->getUrl($up_domain ,$file_name);
+    $tmp_img = $imagefile;
+    
+    return _make_image($tmp_img, $image_type, $extention, $opt);
+}
+
+function _make_image($tmp_img, $image_type, $extention, $opt)
+{
+    $resize = $opt['resize'];
+    $opt_list = $opt['list'];
+    if (!$opt_list) {
+        $opt_list = array($opt);
+    }
+
+    $ret = array();
+    foreach ($opt_list as $opt_) {
+        if ($resize) {
+            $content = image_file_resize($tmp_img, $image_type, $opt_['crop'], $opt_['width'], $opt_['height']);
         } else {
-            $dst_root = $root_path.'data/upload/';
-            $year_month_folder = date('Ym');
-            $path = $year_month_folder;
-            if (!file_exists($dst_root.$path)) {
-                mkdir($dst_root.$path);
-            }
-            $date_folder = date('d');
-            $path .= '/'.$date_folder;
-            if (!file_exists($dst_root.$path)) {
-                mkdir($dst_root.$path);
-            }
-            $path .= '/'.$file_name;
-            file_put_contents($dst_root.$path, $content);
-//            move_uploaded_file($tmp_img, $dst_root.$path);
-            return ROOT . 'data/upload/' . $path;
+            $content = file_get_contents($tmp_img);
         }
+        $file_name = uniqid() . '.' . $extention;
+        $ret[] = write_upload($content, $file_name);
+    }
+    return count($ret) === 1 ? reset($ret) : $ret;
+}
+
+/**
+ * main function
+ * @param type $image is xx in $_FILES['xx']
+ * @param type $opt resize crop width height
+ * @return string url of the final img
+ * @throws Exception
+ */
+function make_image($image, $opt=array()) {
+    
+    // default option
+    $opt = array_merge(array(
+        'crop' => 0,
+        'resize' => 0,
+        'width' => 50,
+        'height' => 50,
+        'list' => null,
+    ), $opt);
+    
+    $image = $_FILES[$image];
+    
+    $arr = explode('/', $image['type']);
+    $file_type = reset($arr);
+    $image_type = end($arr);
+    if ($file_type == 'image') {
+        
+        $extention = file_ext($image['name']);
+        
+        $tmp_img = $image['tmp_name'];
+
+        return _make_image($tmp_img, $image_type, $extention, $opt);
     } else { // maybe throw??
         return '';
     }
+}
+
+// write file content to dst
+function write_upload($content, $file_name) {
+    if (ON_SAE) {
+        $up_domain = UP_DOMAIN;
+        $s = new SaeStorage();
+        $s->write($up_domain , $file_name , $content);
+        return $s->getUrl($up_domain ,$file_name);
+    } else {
+        $root = 'data/';
+        if (!file_exists($root)) {
+            mkdir($root);
+        }
+        $dst_root = $root .'upload/';
+        if (!file_exists($dst_root)) {
+            mkdir($dst_root);
+        }
+        $year_month_folder = date('Ym');
+        $path = $year_month_folder;
+        if (!file_exists($dst_root.$path)) {
+            mkdir($dst_root.$path);
+        }
+        $date_folder = date('d');
+        $path .= '/'.$date_folder;
+        if (!file_exists($dst_root.$path)) {
+            mkdir($dst_root.$path);
+        }
+        $path .= '/'.$file_name;
+        file_put_contents($dst_root.$path, $content);
+        return ROOT . 'data/upload/' . $path;
+    }
+}
+
+function file_ext($file_name) {
+    $arr = explode('.', $file_name);
+    if (count($arr) < 2) {
+        throw new Exception('bad file name: ' . $image['name']);
+    }
+    return end($arr);
 }
 
 function out_json($arr, $quit=true) {
@@ -271,5 +348,3 @@ function sae_log($msg){
     sae_debug($msg);//记录日志
     sae_set_display_errors(true);//记录日志后再打开信息输出，否则会阻止正常的错误信息的显示
 }
-
-?>

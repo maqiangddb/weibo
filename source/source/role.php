@@ -57,7 +57,7 @@ switch (get_set($_REQUEST['method'])) {
         $is_v = ($is_v=='on' || $is_v=='1')? 1 : 0;
         $avatar_img = get_set($_FILES['avatar']);
         if ($avatar_img && $avatar_img['name']) {
-            $avatar = make_image($avatar_img, array(
+            $avatar = make_image('avatar', array(
                 'resize'=>1,
                 'crop'=>1,
                 'width'=>50,
