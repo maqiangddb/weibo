@@ -16,7 +16,7 @@
         <meta name="keywords" content="<?php echo implode(', ', get_set($page['keywords'], array())); ?>" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <?php
-        echo css_node('bootstrap');
+        echo css_node('bootstrap.min');
         $ext = 'css';// ON_SERVER ? 'css' : 'less';
         echo get_set($page['style'])? css_node($page['style'], $ext) : css_node('style', $ext);
         ?>

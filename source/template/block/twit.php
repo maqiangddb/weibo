@@ -9,21 +9,21 @@
 ?>
 <li class="twit" data-id="<?php echo $t['id']; ?>">
     <?php include _block('pure_twit'); ?>
-    <div class="control">
-        <?php if ($t['scene']) { ?>
+    <div class="control row-fluid">
+      <?php if ($t['scene']) { ?>
         <span class="scene">场景：<a href="<?php echo '?scene='.$t['scene_id']; ?>"><?php echo $t['scene']; ?></a></span>
-        <?php } ?>
-        <span class="time"><?php echo $t['time']; ?></span>
-        <a href="<?php echo $rooturl.'twit/'.$t['id']; ?>">分享</a>
-        <?php if (0) { ?>
-        <?php if ($t['can_up']) { ?>
-        <a class="up-btn" href="<?php echo $rooturl.'twit/'.$t['id']; ?>?method=up">顶</a>
-        <?php } else { ?>
-        <span>顶过</span>
-        <?php } ?>
-        <?php } ?>
-        <a class="retweet-btn">转发（<?php echo $t['retweet_num']; ?>）</a>
-        <span class="comment-btn">评论（<?php echo $t['comment_num']; ?>）</span>
+      <?php } ?>
+      <span class="time"><?php echo $t['time']; ?></span>
+      <a href="<?php echo $rooturl.'twit/'.$t['id']; ?>">分享</a>
+      <?php if (0) { ?>
+      <?php if ($t['can_up']) { ?>
+      <a class="up-btn" href="<?php echo $rooturl.'twit/'.$t['id']; ?>?method=up">顶</a>
+      <?php } else { ?>
+      <span>顶过</span>
+      <?php } ?>
+      <?php } ?>
+      <a class="retweet-btn">转发（<?php echo $t['retweet_num']; ?>）</a>
+      <span class="comment-btn">评论（<?php echo $t['comment_num']; ?>）</span>
     </div>
     <?php 
     $comments = $t['comments'];

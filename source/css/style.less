@@ -66,12 +66,6 @@ span.verify {
     color: red;
 }
 
-div.avatar {
-    float: left;
-    margin-right: 10px;
-    margin-bottom: 10px;
-}
-
 @page-background-color: #F0F0F0;
 body {
     background-color: @page-background-color;
@@ -181,6 +175,8 @@ ul.comment {
         color: #333;
     }
 }
+
+/*微博条目*/
 li.twit, div.twit {
     &:first-child {
         border-radius: 6px 6px 0 0;
@@ -201,6 +197,9 @@ li.twit, div.twit {
         .name {
             font-size: 15pt;
         }
+    }
+    .avatar a {
+        padding: 0;
     }
     a.login-need {
         border: 3px dotted #666;

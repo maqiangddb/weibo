@@ -8,13 +8,13 @@
  */
 ?>
 <div class="content">
-    <div class="in">
-        <div class="avatar">
+    <div class="in row-fluid">
+        <div class="avatar span1">
             <a href="<?php echo $rooturl.'role/'.$t['role_id']; ?>">
-                <img title="<?php echo implode(',', $t['tag']); ?>" src="<?php echo $t['avatar']?:$config['default_avatar']; ?>" />
+                <img class="img-polaroid" title="<?php echo implode(',', $t['tag']); ?>" src="<?php echo $t['avatar']?:$config['default_avatar']; ?>" />
             </a>
         </div>
-        <div>
+        <div class="span11">
             <a href="<?php echo $rooturl.'role/'.$t['role_id']; ?>"><span class="name"><?php echo $t['author'].($t['is_v']?'<span class="verify">V</span>':''); ?>：</span></a>
             <span class="text"><?php echo $t['text']; ?></span>
         </div>
