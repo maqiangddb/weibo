@@ -19,6 +19,7 @@
         <a class="retweet-btn">转发（<?php echo $t['retweet_num']; ?>）</a>
         <a class="comment-btn">评论（<?php echo $t['comment_num']; ?>）</a>
     </div>
+
     <!-- JiaThis Button BEGIN -->
     <div id="ckepop">
         <span class="jiathis_txt">分享到：</span>
@@ -31,13 +32,14 @@
     </div>
     <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1341805713461476" charset="utf-8"></script>
     <!-- JiaThis Button END -->
+
     <div class="comment">
         <?php if ($role_id) { ?>
         <form action="?" method="post">
             <div class="comment-form">
                 <input type="hidden" name="method" value="comment" />
                 <textarea name="text"></textarea>
-                <input type="submit" value="评论" />
+                <input type="submit" value="评论" class="btn" />
             </div>
         </form>
         <?php } else { ?>
@@ -61,8 +63,4 @@
         <?php } ?>
     </div>
 </div>
-<?php //echo js_node('widget'); ?>
-<script>
-    //$('textarea[name=text]').atBox();
-</script>
 
