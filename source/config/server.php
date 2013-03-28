@@ -12,7 +12,8 @@ $config['version'] = array(
     'js'=>'13-1-31',
     'css'=>'13-2-10',
 );
-$config['up_domain'] = 'wbbystatic';
+
+define('UP_DOMAIN', 'wbbystatic');
 
 $config['db'] = array(
     'dsn' => 'mysql:'.implode(';', array('host='.SAE_MYSQL_HOST_M, 'port='.SAE_MYSQL_PORT, 'dbname='.SAE_MYSQL_DB)),
