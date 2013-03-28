@@ -68,13 +68,13 @@ $page['scripts'][] = js_node('page/index');
         </div>
       <?php endif; ?>
     </div>
-    <div class="scene-twit">
-        <ul class="twit">
+    <div class="scene-twit row-fluid">
+        <ul class="twit span10">
             <?php foreach ($twit_list as $t) { ?>
             <?php include _block('twit'); ?>
             <?php } ?>
         </ul>
-        <ul class="scene nav nav-pills nav-stacked">
+        <ul class="scene nav nav-pills nav-stacked span2">
             <li class="<?php echo empty($scene_id)?'on':''; ?>"><a href="?">所有场景</a></li>
             <?php foreach ($scenes as $s) { ?>
             <li class="<?php echo $scene_id==$s['id']?'on':''; ?>"><a href="?scene=<?php echo $s['id']; ?>"><?php echo $s['name']; ?></a></li>

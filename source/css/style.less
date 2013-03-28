@@ -130,65 +130,14 @@ ul.comment {
     padding: 10px 0;
     border-bottom: 1px solid #E2E2E2;
 }
-@input-width: 340px;
-.at-box {
-    border: 1px solid #555;
-    width: @input-width;
-    li {
-        border-left: 3px solid #666;
-        margin: 5px;
-    }
-    li:hover {
-        cursor: pointer;
-        background-color: #ddd;
-    }
-}
+
 .del-link {
     font-size: 10pt;
     color: #DD204C;
 }
-.btn-base {
-    cursor: auto;
-    &:hover {
-        cursor: pointer;
-    }
-}
-.ok-btn-base {
-    .btn-base;
-    border: 1px solid #666;
-    border-radius: 4px;
-    background-color: #ccc;
-    padding: 5px 10px;
-    &:hover {
-        background-color: #fff;
-        cursor: pointer;
-    }
-}
-.ta-base {
-    border: 1px solid #999;
-    color: #aaa;
-    &:hover {
-        border-color: #666;
-    }
-    &:focus {
-        border-color: #666;
-        color: #333;
-    }
-}
 
 /*微博条目*/
 li.twit, div.twit {
-    &:first-child {
-        border-radius: 6px 6px 0 0;
-    }
-    background-color: #fff;
-    padding: 20px 10px;
-    @twit-sep-style: 1px solid #BABABA;
-    border-bottom: @twit-sep-style;
-    &:last-child {
-        border-bottom: none;
-        border-radius: 0 0 6px 6px;
-    }
     a {
         color: #04553C;
         font-size: 12pt;
@@ -198,9 +147,13 @@ li.twit, div.twit {
             font-size: 15pt;
         }
     }
-    .avatar a {
-        padding: 0;
+
+    .right-col {
+        background: #fff;
     }
+
+
+
     a.login-need {
         border: 3px dotted #666;
         text-align: center;
@@ -258,7 +211,6 @@ li.twit, div.twit {
         .box-bg;
         .comment-form {
             textarea {
-                .ta-base;
                 height: 1.5em;
                 width: 100%;
             }
@@ -545,20 +497,6 @@ div.scene-list {
     }
     .index {
         .in-wrap;
-        .new-msg {
-        }
-        
-        div.scene-twit {
-            ul.scene {
-                float: right;
-                width: 110px;
-            }
-            ul.twit {
-                float: left;
-                width: @twit-content-width;
-
-            }
-        }
     }
     .role {
         .in-wrap;
