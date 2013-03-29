@@ -1,15 +1,23 @@
 
 /*微博条目*/
 li.twit, div.twit {
-    @top-padding: 10px;
 
     .right-col {
         background: #fff;
         border-bottom: 1px solid #97BEDD;
-        padding-top: @top-padding;
-        padding-left: 5px;
         box-shadow: 0px 1px 3px #849AA7;
         margin-bottom: 10px;
+
+        .name-bar {
+            padding: 6px;
+            padding-top: 8px;
+            border-bottom: 1px solid #C7C1C1;
+            background-color: #F6F4F4;
+        }
+
+        .content {
+            padding: 10px;
+        }
     }
 
     a.login-need {
@@ -37,12 +45,15 @@ li.twit, div.twit {
     .control {
         text-align: right;
         padding-top: 10px;
+        padding-right: 30px;
         clear: both;
-        .time, .scene {
-            float: left;
-        }
-        .del {
-            display: none;
+
+        .retweet-btn-wrap {
+            .btn {
+                padding-right: 0;
+            }
+
+            padding-right: 12px;
         }
     }
     a.edit {

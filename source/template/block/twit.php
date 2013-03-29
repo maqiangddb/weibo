@@ -8,7 +8,6 @@
  */
 ?>
 <li class="twit" data-id="<?php echo $t['id']; ?>">
-  <?php include _block('pure_twit'); ?>
   <div class="content row-fluid">
     <div class="span1 left-col">
       <a href="<?php echo $rooturl.'role/'.$t['role_id']; ?>">
@@ -17,13 +16,18 @@
     </div>
 
     <div class="span11 right-col">
-      <a href="<?php echo $rooturl.'role/'.$t['role_id']; ?>" class="">
-        <?php echo $t['author']; ?>
-      </a>
-      <?php if ($t['is_v']): ?>
-        <span class="verify">V</span>
-      <?php endif ?>
-      <span class="text"><?php echo $t['text']; ?></span>
+
+      <div class="name-bar">
+        <a href="<?php echo $rooturl.'role/'.$t['role_id']; ?>" class=""><?php echo $t['author']; ?></a>
+        <?php if ($t['is_v']): ?>
+          <span class="verify">V</span>
+        <?php endif ?>
+        <span class="time label label-info pull-right"><?php echo $t['time']; ?></span>
+      </div>
+      
+      <div class="content">
+        <span class="text"><?php echo $t['text']; ?></span>
+      </div>
       <?php if ($t['image']): ?>
         <div class="image">
           <img src="<?php echo $t['image']; ?>" class="img-polaroid" />
@@ -39,13 +43,14 @@
             </a>
           </div>
           <div class="span11">
-              <a href="<?php echo $rooturl.'role/'.$t['origin']['role_id']; ?>">
-                <?php echo $t['origin']['author']; ?>
-              </a>
-              <?php if ($t['origin']['is_v']): ?>
-                <span class="verify">V</span>
-              <?php endif ?>
-              <span class="text"><?php echo $t['origin']['text']; ?></span>
+            <span class="time label pull-right"><?php echo $t['origin']['time']; ?></span>
+            <a href="<?php echo $rooturl.'role/'.$t['origin']['role_id']; ?>">
+              <?php echo $t['origin']['author']; ?>
+            </a>
+            <?php if ($t['origin']['is_v']): ?>
+              <span class="verify">V</span>
+            <?php endif ?>
+            <span class="text"><?php echo $t['origin']['text']; ?></span>
           </div>
           <?php if ($t['origin']['image']): ?>
             <div class="image row">
@@ -53,22 +58,23 @@
             </div>
           <?php endif ?>
           <div class="control">
-              <span class="time label label-info"><?php echo $t['origin']['time']; ?></span>
-              <a class="">转发（<?php echo $t['origin']['retweet_num']; ?>）</a>
+              <span class="">转发(<?php echo $t['origin']['retweet_num']; ?>)</span>
               <?php if (0) { ?><a class="">评论（<?php echo $t['origin']['comment_num']; ?>）</a><?php } ?>
           </div>
         </div>
       </div>
       <?php endif ?>
 
-      <div class="control row-fluid">
+      <div class="control">
         <?php if ($t['scene']) { ?>
           <span class="scene">场景：<a href="<?php echo '?scene='.$t['scene_id']; ?>"><?php echo $t['scene']; ?></a></span>
         <?php } ?>
-        <span class="time label label-info"><?php echo $t['time']; ?></span>
         <a href="<?php echo $rooturl.'twit/'.$t['id']; ?>">分享</a>
-        <a class="a-link retweet-btn">转发（<?php echo $t['retweet_num']; ?>）</a>
-        <span class="comment-btn">评论（<?php echo $t['comment_num']; ?>）</span>
+        <span class="retweet-btn-wrap">
+          <a class=" retweet-btn btn btn-link">转发</a>
+          <span>(<?php echo $t['retweet_num']; ?>)</span>
+        </span>
+        <span class="comment-btn">评论(<?php echo $t['comment_num']; ?>)</span>
       </div>
 
       <div class="box-bg">
