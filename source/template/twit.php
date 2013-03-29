@@ -9,7 +9,6 @@
 <div class="twit">
     <?php
     $t = $info;
-    include _block('pure_twit');
     echo js_var('jiathis_config', array(
         'title'=>$info['author'].'的伪博扮演',
         'summary'=>$info['text'],

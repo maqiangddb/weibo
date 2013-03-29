@@ -1,0 +1,82 @@
+
+/*微博条目*/
+li.twit, div.twit {
+    @top-padding: 10px;
+
+    .right-col {
+        background: #fff;
+        border-bottom: 1px solid #8A7F7F;
+        padding-top: @top-padding;
+        padding-left: 5px;
+    }
+
+    a.login-need {
+        border: 3px dotted #666;
+        text-align: center;
+        padding: 8px;
+        border-radius: 6px;
+        display: block;
+        color: #B18282;
+        &:hover {
+            text-decoration: none;
+            color: #844949;
+        }
+    }
+    div.image{
+        clear: both;
+        padding: 10px 0;
+        img {
+            display: block;
+            margin: auto;
+        }
+    }
+    .origin {
+    }
+    .control {
+        text-align: right;
+        padding-top: 10px;
+        clear: both;
+        .time, .scene {
+            float: left;
+        }
+        .del {
+            display: none;
+        }
+    }
+    a.edit {
+        float: right;
+    }
+    div.comment {
+        form {
+            margin-bottom: 0;
+        }
+        .comment-form {
+            textarea {
+                height: 1.5em;
+                width: 100%;
+            }
+        }
+        .comment-form.on {
+            textarea {
+                height: 50px;
+                width: 566px;
+                display: inline-block;
+                float: right;
+            }
+            input[disabled] {
+                color: #666;
+            }
+            input[disabled]:hover {
+                background-color: #ccc;
+                cursor: not-allowed;
+            }
+        }
+    }
+    .pop-panel span {
+        display: inline-block;
+        padding: 10px;
+    }
+}
+li.twit:hover .del {
+    display: inline;
+}

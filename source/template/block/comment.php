@@ -18,7 +18,7 @@
           <div class="span11">
             <textarea name="text" placeholder="说点什么吧" class="span12"></textarea>
           </div>
-          <input type="submit" value="评论" class="btn btn-small" />
+          <input type="submit" value="评论" class="comment-btn btn pull-right" />
         </div>
     </form>
     <?php else: ?>
