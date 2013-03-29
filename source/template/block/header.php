@@ -8,10 +8,9 @@
  */
 ?>
 <h1 title="伪博扮演 首页">
-    <?php if (0) { ?>
-    <img src="<?php echo ROOT; ?>img/logo.png" />
-    <?php } ?>
-    <a href="<?php echo ROOT; ?>"><span class="text">伪博扮演</span><span class="beta">Beta</span></a>
+  <a href="<?php echo ROOT; ?>">
+    <span class="text">伪博扮演</span>
+  </a>
 </h1>
 <div class="control">
     <?php if (0) { ?>
