@@ -17,6 +17,7 @@ if ($validate_scene) {
 
 switch ($method) {
     case 'add':
+        $set_title = '创建场景';
         $template = _tpl('scene_add_edit');
         $btn_caption = '创建场景';
         $description = '';
@@ -31,6 +32,7 @@ switch ($method) {
         break;
     case 'edit':
         if ($validate_scene) {
+            $set_title = '编辑场景';
             $template = _tpl('scene_add_edit');
             $btn_caption = '就此更改';
             extract($scene->getInfo());
