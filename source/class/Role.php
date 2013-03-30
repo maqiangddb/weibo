@@ -14,10 +14,6 @@ class Role extends Model {
 
     static $table = 'role';
 
-    function __construct($id) {
-        $this->id = $id;
-    }
-
     public function getInfo($whose_view=0) {
         $conds = array("id=?"=>$this->id);
         $r = Pdb::fetchRow('*', self::$table, $conds);
@@ -26,6 +22,17 @@ class Role extends Model {
             $r['watch'] = $this->watchBy($user_id);
         }
         return $r;
+    }
+
+    public static function hasName($name)
+    {
+        $conds = array('name=?' => $name);
+        $r = Pdb::fetchRow('*', self::$table, $conds);
+        if ($r) {
+            return new self($r);
+        } else {
+            return false;
+        }
     }
 
     private function watchBy($user_id) {

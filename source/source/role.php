@@ -29,7 +29,10 @@ switch (get_set($_REQUEST['method'])) {
     case 'add':
         extract(user_input($_POST, 'name'));
         if ($name) {
-            try { // 这里有ｔｒｙ，但别处没有try，这里是严谨而无趣的地方。。。
+            if ($role = Role::hasName($name)) {
+                redirect($rooturl.'role/'.$role->id);
+            }
+            try { // 这里有 try，但别处没有try，这里是严谨而无趣的地方。。。
                 $role = Role::add($name);
                 $role->addToHistory();
                 redirect($rooturl . 'role/' . $role->id);
