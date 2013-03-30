@@ -29,10 +29,11 @@ if ($validate_role) {
             <li><span><?php echo $tag; ?></span></li>
             <?php } ?>
         </ul>
-        <form action="<?php echo $base_url.$info['id']; ?>" method="post">
+        <form action="<?php echo $base_url.$info['id']; ?>" method="post" class="form-inline">
             <input type="hidden" name="method" value="add_tag" />
             <div class="add-tag-form">
-                <input type="text" name="text" /><input type="submit" value="添加标签" class="btn" />
+                <input type="text" name="text" />
+                <input type="submit" value="添加标签" class="btn" />
             </div>
         </form>
     </div>
