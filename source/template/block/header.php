@@ -13,13 +13,6 @@
   </a>
 </h1>
 <div class="control">
-    <?php if (0) { ?>
-    <?php if (!$has_login) { ?>
-    <a href="<?php echo ROOT; ?>login">登录/注册</a>
-    <?php } else { ?>
-    <span><?php echo $_SESSION['se_user_platform']; ?>用户<img src="<?php echo $_SESSION['se_user_avatar']; ?>" /><span><?php echo $_SESSION['se_user_name']; ?></span><a href="<?php echo ROOT; ?>logout">退出登录</a></span>
-    <?php } ?>
-    <?php } ?>
     <?php if ($role_id) { ?>
     <span>正在扮演</span>
     <a href="<?php echo $rooturl.'role/'.$role_id; ?>">

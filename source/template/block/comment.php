@@ -22,7 +22,5 @@
         </div>
     </form>
     <?php else: ?>
-    <a class="login-need" href="<?php echo $rooturl . 'role'; ?>">请先扮演角色再发表评论</a>
     <?php endif; ?>
-    
 </div>

@@ -9,7 +9,7 @@
 $page['scripts'][] = js_node('page/index');
 ?>
 <div class="index">
-    <?php if(!get_set($_SESSION['se_know_post'])) { ?>
+    <?php if(!$role_id && !get_set($_SESSION['se_know_post'])) { ?>
     <div class="post">
         <span>公告：本伪博所有内容纯属虚构，仅供娱乐。</span>
         <a href="#" class="know">我知道了</a>
@@ -51,7 +51,7 @@ $page['scripts'][] = js_node('page/index');
       </div>
     </div>
     <?php } else { ?>
-    <div class="choose"><a href="<?php echo ROOT; ?>role">选择一个角色</a>，开始吧(选择完角色才能发言)。</div>
+    <div class="choose">请首先<a href="<?php echo ROOT; ?>role">选择一个角色</a>，开始在伪博扮演的旅程吧</div>
     <?php } ?>
     <a href="?" class="new-msg" style="display: none">有<span class="new-msg-num"></span>条新微博，点击查看</a>
     <div class="content-top">

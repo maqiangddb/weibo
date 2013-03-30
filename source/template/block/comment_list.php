@@ -3,9 +3,9 @@
 ?>
 <?php foreach ($comments as $c) { ?>
 <li class="comment high">
-  <a href="<?php echo $rooturl . 'role/' . $c['author_id']; ?>" class="name-wrap">
+  <span class="name-wrap">
     <img src="<?php echo $c['avatar']?:$config['default_avatar']; ?>" />
-  </a>
+  </span>
   <a href="<?php echo $rooturl . 'role/' . $c['author_id']; ?>" class="name-wrap">
     <?php echo $c['author']; ?>
   </a>

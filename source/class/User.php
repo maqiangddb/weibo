@@ -58,7 +58,6 @@ class User {
     }
 
     private static function createOpenId($platform, $id) {
-        d($platform);
         //....
         Pdb::insert(array(
             'platform'=>$platform,
@@ -116,4 +115,3 @@ class User {
     }
 }
 
-?>

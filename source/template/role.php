@@ -60,7 +60,7 @@ $page['scripts'][] = js_node('page/add_search_role');
 ?>
 <div class="role">
     <div class="add">
-        <form method="post" action="?" enctype="multipart/form-data">
+        <form method="post" action="?" enctype="multipart/form-data" class="form-inline">
             <input type="hidden" name="method" value="add" />
             <div class="search-add-role-form">
                 <label>角色名称：</label>

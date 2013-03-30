@@ -77,12 +77,12 @@
         <span class="comment-btn">评论(<?php echo $t['comment_num']; ?>)</span>
       </div>
 
-      <div class="box-bg">
+      <?php if ($role_id || $t['comments']): ?>
         <?php 
         $comments = $t['comments'];
         include _block('comment'); 
         ?>
-      </div>
+      <?php endif ?>
 
       <div class="retweet box-bg" style="display: none">
         <div class="row-fluid">

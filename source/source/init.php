@@ -47,7 +47,3 @@ if ($user_id && isset($_SESSION['se_user_name'])) {
 
 require_once _class('Perm');
 $perm = Perm::getByUserKind(get_set($user_info['kind']));
-
-
-
-?>
