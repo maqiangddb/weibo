@@ -9,7 +9,6 @@
 if (isset($_SERVER['HTTP_APPNAME'])) {
     define('ON_SERVER', TRUE);
     define('ON_SAE', 1);
-    define('SAE_APPNAME', $_SERVER['HTTP_APPNAME']);
 } else {
     define('ON_SERVER', FALSE);
     define('ON_SAE', 0);

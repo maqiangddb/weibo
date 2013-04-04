@@ -8,17 +8,12 @@ $(function () {
     // 评论
     $('.comment-form').each(function () {
         var commentForm = $(this);
-        var avatar = commentForm.find('.avatar').hide();
-        var okBtn = commentForm.find('.comment-btn').hide();
+        var okBtn = commentForm.find('.comment-btn');
         commentForm.find('textarea').focus(function () {
-            commentForm.addClass('on');
-            avatar.show();
-            okBtn.show();
+            commentForm.addClass('on').removeClass('shrink');
         }).focusout(function () {
             if ($(this).val() === '') {
-                commentForm.removeClass('on');
-                avatar.hide();
-                okBtn.hide();
+                commentForm.removeClass('on').addClass('shrink');
             }
         }).keyup(function () {
             if ($(this).val() == '') {

@@ -59,25 +59,23 @@ li.twit, div.twit {
             margin-bottom: 0;
         }
         .comment-form {
+            margin-top: 10px;
+        }
+        .comment-form.shrink {
+            img {
+                display: none;
+            }
             textarea {
                 height: 1.5em;
-                width: 100%;
+            }
+            .btn {
+                display: none;
             }
         }
-        .comment-form.on {
-            textarea {
-                height: 50px;
-                width: 566px;
-                display: inline-block;
-                float: right;
-            }
-            input[disabled] {
-                color: #666;
-            }
-            input[disabled]:hover {
-                background-color: #ccc;
-                cursor: not-allowed;
-            }
+    }
+    div.retweet {
+        form {
+            margin-bottom: 0;
         }
     }
     .pop-panel span {

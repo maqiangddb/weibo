@@ -35,7 +35,9 @@ $(function () {
 
     // 转发
     $('a.retweet-btn').click(function () {
-        $(this).parents('li.twit').find('div.retweet').show().find('textarea').focus();
+        var li = $(this).parents('li.twit');
+        li.find('div.retweet').show().find('textarea').focus();
+        li.find('div.comment').hide();
         return false;
     });
 

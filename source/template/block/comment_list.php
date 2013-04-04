@@ -1,8 +1,8 @@
 <?php
 !defined('IN_KC') && exit('Access Denied');
 ?>
-<?php foreach ($comments as $c) { ?>
-<li class="comment high">
+<?php foreach ($comments as $c): ?>
+<li class="comment">
   <span class="name-wrap">
     <img src="<?php echo $c['avatar']?:$config['default_avatar']; ?>" />
   </span>
@@ -16,4 +16,4 @@
   <span><?php echo $c['text']; ?></span>
   <span class="pull-right time"><?php echo $c['time'] ?></span>
 </li>
-<?php } ?>
+<?php endforeach ?>
