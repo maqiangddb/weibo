@@ -80,10 +80,13 @@ $(function () {
             },
             function (ret) {
                 console.log(ret);
+                if (ret) {
+                    $('span.name').tooltip({html: ret+' message comes'})
+                };
                 setTimeout(getNotification, interval);
             },
             'html');
     };
-    setTimeout(getNotification, interval);
+    // setTimeout(getNotification, interval);
     
 });

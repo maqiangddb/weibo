@@ -7,6 +7,6 @@
  * @created Jul 18, 2012 10:23:53 PM
  */
 
-$twits = Twit::search()->by('(UNIX_TIMESTAMP(`time`)+3*60) > UNIX_TIMESTAMP()')->find();
-echo json_encode(array_map(function ($t) {return $t->toArray();}, $twits));
+$count = Twit::search()->by('(UNIX_TIMESTAMP(`time`)+3*60) > UNIX_TIMESTAMP()')->count();
+echo $count;
 exit;

@@ -47,7 +47,8 @@
             <?php if ($show_footer) { include 'template/block/footer.php'; } ?>
         </div>
         <?php
-        echo js_node('jquery-1.7.2.min');
+        echo js_node('jquery-1.8.3.min');
+        echo js_node('bootstrap.min');
         echo js_var('G', array('ROOT_URL'=>ROOT));
         echo implode('', $page['scripts']);
         echo js_node('every');
