@@ -11,14 +11,9 @@
  */
 class Twit extends CoreModel {
 
-    protected $id = null;
     protected $table = 'twit';
 
     const ORIGIN_EXPLODE = 1;
-
-    function __construct($id) {
-        $this->id = $id;
-    }
 
     public function getInfo($origin_explode=1) {
         //....
