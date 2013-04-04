@@ -9,10 +9,10 @@
  * @author  ryan <cumt.xiaochi@gmail.com>
  * @created Jul 17, 2012 3:15:17 PM
  */
-class Twit {
+class Twit extends CoreModel {
 
-    private $id = null;
-    private $table = 'twit';
+    protected $id = null;
+    protected $table = 'twit';
 
     const ORIGIN_EXPLODE = 1;
 

@@ -9,6 +9,7 @@
 if (isset($_SERVER['HTTP_APPNAME'])) {
     define('ON_SERVER', TRUE);
     define('ON_SAE', 1);
+    define('SAE_APPNAME', $_SERVER['HTTP_APPNAME']);
 } else {
     define('ON_SERVER', FALSE);
     define('ON_SAE', 0);
@@ -22,7 +23,7 @@ if (!ON_SERVER) { // server中的配置不同
     define('ROOT', '/');
 }
 
-$config['db'] = array(
+$config['pdb'] = array(
     'dsn' => 'mysql:host=localhost;dbname=weibo',
     'username' => 'root',
     'pwd' => 'root'
@@ -32,20 +33,21 @@ $config['db'] = array(
 
 // 网址=>控制器
 $config['controls'] = array(
-    'index'=>'index',
-    'hot'=>'index',
-    'role'=>'role',
-    'twit'=>'twit',
-    'help'=>'about',
-    'log'=>'about',
-    'credit'=>'about',
-    'about'=>'about',
-    'todo'=>'about',
-    'login'=>'login',
-    'logout'=>'login',
-    'scene'=>'scene',
-    'longtian'=>'longtian',
-    'post'=>'post',
+    'index' => 'index',
+    'hot' => 'index',
+    'role' => 'role',
+    'twit' => 'twit',
+    'help' => 'about',
+    'log' => 'about',
+    'credit' => 'about',
+    'about' => 'about',
+    'todo' => 'about',
+    'login' => 'login',
+    'logout' => 'login',
+    'scene' => 'scene',
+    'longtian' => 'longtian',
+    'post' => 'post',
+    'ajax' => 'ajax',
 );
 
 $config['qq_login'] = array(

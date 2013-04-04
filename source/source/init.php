@@ -12,8 +12,11 @@ $page['keywords'] = array('伪博','扮演');
 $rooturl = ROOT; // TODO
 $method = get_set($_REQUEST['method']);
 
-require_once 'lib/Pdb.php';
-Pdb::setConfig($config['db']);
+require_once AROOT.'lib/Pdb.php';
+Pdb::setConfig($config['pdb']);
+
+require_once AROOT.'lib/db.function.php';
+require_once AROOT.'lib/core.class.php';
 
 $role_id = get_set($_SESSION['se_role_id']);
 if ($role_id) {

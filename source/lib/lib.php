@@ -96,9 +96,9 @@ function friendly_time2($date_time_str) {
             else
                 return $diff->i.'分钟前'; // minutes
         else
-            return '今天'.end(explode(' ', $date_time_str));
+            return '今天';
     } else {
-        return $date_time_str;
+        return current(explode(' ', $date_time_str));
     }
 }
 

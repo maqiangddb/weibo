@@ -1,10 +1,20 @@
 <?php
 !defined('IN_KC') && exit('Access Denied');
 
+
+// load model classes
+spl_autoload_register(function ($name) {
+    $fname = AROOT . 'class/' . $name . '.php';
+    if ( file_exists( $fname ) ) 
+    {
+        require_once( $fname );
+    }
+});
+
 $root_path = __DIR__.'/'; // 没用啊。。。
 
 // 变量初始化
-$show_header = 1; // 这种东西是否应该仍到config中？或者集合到$show变量里
+$show_header = 1; // 这种东西是否应该扔到config中？或者集合到$show变量里
 $show_footer = 1;
 
 $request_uri = substr(reset(explode('?',$_SERVER['REQUEST_URI'])), strlen(ROOT));
@@ -25,5 +35,3 @@ if (in_array($ip, $ip_ban)) {
     exit('Sorry, Your IP is of malice.');
 }
 
-
-?>

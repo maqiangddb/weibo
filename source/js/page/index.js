@@ -47,7 +47,7 @@ $(function () {
     };
 
     // 所有的转发框和评论框都有at功能
-    $('.post-comment-form textarea, .retweet-form textarea, .post-form textarea').atBox();
+    // $('.post-comment-form textarea, .retweet-form textarea, .post-form textarea').atBox();
 
     $('a.open-remind').click(function () {
         $('ul.remind').toggle('fast');
@@ -67,5 +67,23 @@ $(function () {
         });
         return false;
     });
+
+
+    var interval = 1000 * 3;
+    var getNotification = function () {
+        console.log('getNotification');
+        $.get(
+            '/ajax',
+            {
+                action: 'get',
+                target: 'notification'
+            },
+            function (ret) {
+                console.log(ret);
+                setTimeout(getNotification, interval);
+            },
+            'html');
+    };
+    setTimeout(getNotification, interval);
     
 });

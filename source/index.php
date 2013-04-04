@@ -12,20 +12,21 @@ ini_set('display_errors', 1); // 在 SAE 上 ini_set() 不起作用，但也不�
 error_reporting(E_ALL);
 
 define('IN_KC', 1);
+define('AROOT', __DIR__.'/');
 
-require 'lib.php';
-require 'config/common.php';
+require AROOT.'lib/lib.php';
+require AROOT.'config/common.php';
 if (ON_SERVER) {
     require 'config/server.php'; // sever中的配置会覆盖common中的配置
 }
 
-require 'init.php'; // 变量的初始化
+require AROOT.'init.php'; // 变量的初始化
 
 date_default_timezone_set('PRC');
 ob_start();
 session_start();
 
-require 'source/init.php';
+require AROOT.'source/init.php';
 
 if (isset($force_redirect)) { // 强制跳转 这个在整站关闭的时候也很有用啊
     include 'source/'.$force_redirect.'.php';

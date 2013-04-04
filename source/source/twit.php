@@ -123,4 +123,3 @@ if ($validate_twit) {
     $_SESSION['se_visited_twits'] = implode(',', $visited_twits);
 }
 
-?>

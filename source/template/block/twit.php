@@ -7,7 +7,7 @@
  * need $t as $twit
  */
 ?>
-<li class="twit" data-id="<?php echo $t['id']; ?>">
+<li class="twit" data-id="<?php echo $t['id']; ?>" id="t<?php echo $t['id'] ?>">
   <div class="content row-fluid">
     <div class="span1 left-col">
       <a href="<?php echo $rooturl.'role/'.$t['role_id']; ?>">
