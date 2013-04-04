@@ -9,7 +9,7 @@
  */
 
 $config['version'] = array(
-    'js'=>'C03',
+    'js'=>'C0331',
     'css'=>'C0331',
 );
 
