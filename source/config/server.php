@@ -9,8 +9,8 @@
  */
 
 $config['version'] = array(
-    'js'=>'C0331',
-    'css'=>'C0331',
+    'js'=>'C05',
+    'css'=>'C05',
 );
 
 define('UP_DOMAIN', 'wbbystatic');

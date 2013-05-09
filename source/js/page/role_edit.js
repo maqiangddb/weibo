@@ -1,6 +1,10 @@
 $(function () {
     $('#avatar_upload').fileupload({
         dataType: 'json',
+        start: function () {
+            var upload = $('label[for=avatar_upload]')
+                .text('载入中...');
+        },
         done: function (e, data) {
             $('.info img').attr('src', data.result.path);
             $.post(
@@ -11,7 +15,7 @@ $(function () {
                     value: data.result.path
                 },
                 function (ret) {
-                    console.log('ok');
+                    $('label[for=avatar_upload]').text('更换头像');
                 }
             );
         }
