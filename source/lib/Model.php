@@ -23,5 +23,3 @@ class Model {
         return array('id=?' => $this->id);
     }
 }
-
-?>

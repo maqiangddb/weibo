@@ -1,13 +1,14 @@
 <?php
 !defined('IN_KC') && exit('Access Denied');
 
-
-// load model classes
+// load model classes and more
 spl_autoload_register(function ($name) {
-    $fname = AROOT . 'class/' . $name . '.php';
-    if ( file_exists( $fname ) ) 
-    {
-        require_once( $fname );
+    $lib_class = _lib($name);
+    if (file_exists(_lib($name)) {
+        require_once _lib($name);
+    } else (file_exists(_model($name))) {
+        require_once _lib('Model');
+        require_once _model($name);
     }
 });
 
@@ -34,4 +35,3 @@ $ip = $_SERVER['REMOTE_ADDR'];
 if (in_array($ip, $ip_ban)) {
     exit('Sorry, Your IP is of malice.');
 }
-
