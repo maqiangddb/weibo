@@ -5,7 +5,9 @@
  * @author  ryan <cumt.xiaochi@gmail.com>
  * @created Jul 17, 2012 9:51:11 AM
  */
-
+$page['scripts'][] = js_node('vendor/jquery.ui.widget');
+$page['scripts'][] = js_node('jquery.iframe-transport');
+$page['scripts'][] = js_node('jquery.fileupload');
 $page['scripts'][] = js_node('page/index');
 ?>
 <div class="index">
@@ -34,6 +36,7 @@ $page['scripts'][] = js_node('page/index');
     </div>
     <?php } ?>
     <?php if (get_set($_SESSION['se_role_id'])) { ?>
+    <div class="image-holder well"></div>
     <div class="row-fluid">
       <div class="span1">
         <img class="img-polaroid" src="<?php echo $role_info['avatar'] ?>">
@@ -47,10 +50,11 @@ $page['scripts'][] = js_node('page/index');
             <input type="submit" class="btn btn-primary pull-right" value="发布" />
             <div>
               <label for="fileInput" class="btn"><i class="icon-picture"></i>图片</label>
-              <input type="file" id="fileInput" name="image" />
+              <input type="hidden" name="image_src" >
             </div>
           </div>
         </form>
+        <input type="file" id="fileInput" name="image" data-url="/twit_pre_upload" />
       </div>
     </div>
     <?php } else { ?>

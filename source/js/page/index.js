@@ -92,3 +92,23 @@ $(function () {
     // setTimeout(getNotification, interval);
     
 });
+
+$(function () {
+    $('.image-holder').hide();
+    $('#fileInput').fileupload({
+        dataType: 'json',
+        start: function () {
+            $('label[for=fileInput]')
+                .text('上传...')
+                .prop('disabled', true);
+        },
+        done: function (e, data) {
+            $('input[name=image_src]').val(data.result.path);
+            var img = $('<img />').attr('src', data.result.path).css('class', 'img-polaroid');
+            $('.image-holder').append(img).show('fast');
+            $('label[for=fileInput]')
+                .text('图片')
+                .prop('disabled', false);
+        }
+    });
+});

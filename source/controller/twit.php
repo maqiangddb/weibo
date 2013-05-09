@@ -16,14 +16,10 @@ if ($validate_twit) {
 
 switch (get_set($_REQUEST['method'])) {
     case 'post': // add
-        extract(user_input($_POST, array('text', 'scene')));
-        $image = get_set($_FILES['image']);
-        $image = get_set($image['name']);
-        if ($text || ($image)) {
+        extract(user_input($_POST, array('text', 'scene', 'image_src')));
+        if ($text || ($image_src)) {
             $role = new Role($role_id);
-            $image_path = $image? make_image('image') : '';
-            
-            $role->tweet($text, $image_path, $scene);
+            $role->tweet($text, $image_src, $scene);
         }
         redirect('index?scene='.$scene);
         break;
