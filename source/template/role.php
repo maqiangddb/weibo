@@ -16,16 +16,18 @@ $page['scripts'][] = js_node('jquery.iframe-transport');
 $page['scripts'][] = js_node('jquery.fileupload');
 $page['scripts'][] = js_node('page/change_avatar');
 ?>
-<div class="role-info">
+<div class="role-info" data-id="<?php echo $info['id'] ?>">
     <div class="nav-bar">
         <a href="<?php echo ROOT; ?>role">&lt;返回角色列表</a>
         <a class="switch" href="<?php echo ROOT.'role/'.$info['id']; ?>?method=play">以此身份登录(扮演这个角色)</a>
     </div>
     <div class="info">
+      <div>
         <img src="<?php echo $info['avatar']?:$config['default_avatar']; ?>" />
         <span><?php echo $info['name']; ?></span>
-        <input id="avatar_upload" type="file" name="files" data-url="/role/avatar_upload">
         <div class="recent">最近30天发博<?php echo $recent_twit_num; ?>篇</div>
+      </div>
+      <input id="avatar_upload" type="file" name="avatar" data-url="/role_avatar_upload">
     </div>
     <div class="tag">
         <ul>

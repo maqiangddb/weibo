@@ -26,19 +26,22 @@ date_default_timezone_set('PRC');
 ob_start();
 session_start();
 
-require AROOT.'controller/init.php';
+include _controller('init');
 
 if (isset($force_redirect)) { // 强制跳转 这个在整站关闭的时候也很有用啊
-    include 'controller/'.$force_redirect.'.php';
-    $template = 'template/'.$force_redirect.'.php';
-// 查看是否是合法的$control，如是，则包含文件，如否，则跳转向404页面
-} else if (isset($config['controls'][$control])) {
-    include 'controller/'.$config['controls'][$control].'.php';
-    if (!isset($template))
-        $template = _tpl($config['controls'][$control]); // 默认的template
+    include _controller($force_redirect);
+    $template = _tpl($force_redirect);
 } else {
-    // 404
-    include 'controller/page404.php';
-    $template = 'template/page404.php';
+    // 查看是否是合法的$control，如是，则包含文件，如否，则跳转向404页面
+    $control = isset($config['controls'][$control]) ? $config['controls'][$control] : $control;
+    if (file_exists(_controller($control))) {
+        include _controller($control);
+        if (!isset($template))
+        $template = _tpl($control); // 默认的template
+    }else {
+        // 404
+        include _controller('page404');
+        $template = _tpl('page404');
+    }
 }
-include 'template/master.php';
+include _tpl('master');

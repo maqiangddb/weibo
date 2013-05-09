@@ -32,21 +32,21 @@ $config['pdb'] = array(
 
 // 网址=>控制器
 $config['controls'] = array(
-    'index' => 'index',
-    'hot' => 'index',
-    'role' => 'role',
-    'twit' => 'twit',
-    'help' => 'about',
-    'log' => 'about',
-    'credit' => 'about',
-    'about' => 'about',
-    'todo' => 'about',
-    'login' => 'login',
-    'logout' => 'login',
-    'scene' => 'scene',
+    'index'    => 'index',
+    'hot'      => 'index',
+    'role'     => 'role',
+    'twit'     => 'twit',
+    'help'     => 'about',
+    'log'      => 'about',
+    'credit'   => 'about',
+    'about'    => 'about',
+    'todo'     => 'about',
+    'login'    => 'login',
+    'logout'   => 'login',
+    'scene'    => 'scene',
     'longtian' => 'longtian',
-    'post' => 'post',
-    'ajax' => 'ajax',
+    'post'     => 'post',
+    'ajax'     => 'ajax',
 );
 
 $config['qq_login'] = array(

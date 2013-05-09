@@ -302,11 +302,7 @@ function write_upload($content, $file_name) {
 }
 
 function file_ext($file_name) {
-    $arr = explode('.', $file_name);
-    if (count($arr) < 2) {
-        throw new Exception('bad file name: ' . $image['name']);
-    }
-    return end($arr);
+    return substr(strrchr($file_name, '.'), 1);
 }
 
 function out_json($arr, $quit=true) {
@@ -321,18 +317,22 @@ function redirect($url='/') {
     exit();
 }
 
-function _tpl ($file_name) { // 漏洞？  还有，目录名是否可以变得更简便？
+function _tpl ($file_name) {
     $php_file = 'template/'.$file_name.'.php';
     $html_file = 'template/'.$file_name.'.html';
-    if (file_exists($php_file)) {
-        return $php_file;
-    } else {
+    $phtml_file = 'template/'.$file_name.'.phtml';
+    if (file_exists($phtml_file)) {
+        return $phtml_file;
+    }
+    if (file_exists($html_file)) {
         return $html_file;
+    } else {
+        return $php_file;
     }
 }
 
-function _src ($file_name) {
-    return 'source/'.$file_name.'.php';
+function _controller ($file_name) {
+    return AROOT.'controller/'.$file_name.'.php';
 }
 
 function _class ($name) {
