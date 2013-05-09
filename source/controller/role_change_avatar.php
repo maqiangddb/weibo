@@ -6,8 +6,8 @@
  * @created Jul 17, 2012 10:04:46 AM
  */
 
-$role = Role::get(_get('id'));
-$role->src = _get('src');
+$role = Role::get(_post('id'));
+$role->avatar = _post('src');
 $rs = $role->save();
-var_export($rs);
-
+echo $rs ? 1 : 0;
+exit;

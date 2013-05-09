@@ -14,8 +14,11 @@ $method = get_set($_REQUEST['method']);
 
 Pdb::setConfig($config['pdb']);
 ORM::configure($config['pdb']['dsn']);
-ORM::configure($config['pdb']['username']);
-ORM::configure($config['pdb']['password']);
+ORM::configure('username', $config['pdb']['username']);
+ORM::configure('password', $config['pdb']['password']);
+if (DEBUG) {
+    ORM::configure('logging', true);
+}
 
 require_once AROOT.'lib/db.function.php';
 require_once AROOT.'lib/core.class.php';
