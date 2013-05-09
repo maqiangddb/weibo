@@ -26,7 +26,7 @@ $page['scripts'][] = js_node('page/role_edit');
         </div>
         <div class="span10">
           <div class="recent">最近30天发博<?php echo $recent_twit_num; ?>篇</div>
-          <h4><?php echo $info['name']; ?></h4>
+          <?php include _tpl('role_name') ?>
           <div>
             <label for="is_v"><input type="checkbox" id="is_v" name="is_v" <?php echo $info['is_v']? 'checked':''; ?> /> 加V认证</label>
           </div>
