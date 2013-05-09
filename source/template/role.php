@@ -5,14 +5,17 @@
  * @author  ryan <cumt.xiaochi@gmail.com>
  * @created Jul 17, 2012 10:06:36 AM
  */
-
-if ($validate_role) {
-    $page['scripts'][] = js_node('jquery.form');
-    $page['scripts'][] = js_node('widget');
-    $page['scripts'][] = js_node('page/index');
-}
 ?>
 <?php if (get_set($validate_role)) { ?>
+<?php
+$page['scripts'][] = js_node('jquery.form');
+$page['scripts'][] = js_node('widget');
+$page['scripts'][] = js_node('page/index');
+$page['scripts'][] = js_node('vendor/jquery.ui.widget');
+$page['scripts'][] = js_node('jquery.iframe-transport');
+$page['scripts'][] = js_node('jquery.fileupload');
+$page['scripts'][] = js_node('page/change_avatar');
+?>
 <div class="role-info">
     <div class="nav-bar">
         <a href="<?php echo ROOT; ?>role">&lt;返回角色列表</a>
@@ -21,6 +24,7 @@ if ($validate_role) {
     <div class="info">
         <img src="<?php echo $info['avatar']?:$config['default_avatar']; ?>" />
         <span><?php echo $info['name']; ?></span>
+        <input id="avatar_upload" type="file" name="files" data-url="/role/avatar_upload">
         <div class="recent">最近30天发博<?php echo $recent_twit_num; ?>篇</div>
     </div>
     <div class="tag">
@@ -59,6 +63,7 @@ if ($validate_role) {
 $page['scripts'][] = js_node('bootstrap.min');
 $page['scripts'][] = js_node('widget');
 $page['scripts'][] = js_node('page/add_search_role');
+
 ?>
 <div class="role">
   <div class="add">

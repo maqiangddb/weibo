@@ -157,4 +157,3 @@ function xcsort2(&$arr, $keys) {
     });
 }
 
-?>
