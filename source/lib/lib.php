@@ -335,8 +335,12 @@ function _controller ($file_name) {
     return AROOT.'controller/'.$file_name.'.php';
 }
 
-function _class ($name) {
-    return 'class/'.$name.'.php';
+function _model ($name) {
+    return 'model/'.$name.'.php';
+}
+
+function _lib ($name) {
+    return 'lib/'.$name.'.php';
 }
 
 function _block($name) {
@@ -348,3 +352,14 @@ function sae_log($msg){
     sae_debug($msg);//记录日志
     sae_set_display_errors(true);//记录日志后再打开信息输出，否则会阻止正常的错误信息的显示
 }
+
+function _get($key, $or = null) {
+    return isset($_GET[$key]) ? $_GET[$key] : $or;
+}
+function _post($key, $or = null) {
+    return isset($_POST[$key]) ? $_POST[$key] : $or;
+}
+function _req($key, $or = null) {
+    return isset($_REQUEST[$key]) ? $_REQUEST[$key] : $or;
+}
+

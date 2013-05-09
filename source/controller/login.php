@@ -12,9 +12,6 @@ if ($control=='logout') {
     redirect(ROOT);
 }
 
-require_once _class('QqLogin');
-require_once _class('User');
-
 $platform = 'QQ';
 $qq_login = new QqLogin($config['qq_login']);
 $qq_href = $qq_login->getLoginHref();

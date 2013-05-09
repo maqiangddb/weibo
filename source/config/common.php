@@ -25,7 +25,8 @@ if (!ON_SERVER) { // server中的配置不同
 $config['pdb'] = array(
     'dsn' => 'mysql:host=localhost;dbname=weibo',
     'username' => 'root',
-    'pwd' => ''
+    'pwd' => '',
+    'password' => ''
 );
 
 // === 以下，大部分，server 和 local 相同

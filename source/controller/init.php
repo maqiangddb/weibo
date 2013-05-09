@@ -12,15 +12,16 @@ $page['keywords'] = array('伪博','扮演');
 $rooturl = ROOT; // TODO
 $method = get_set($_REQUEST['method']);
 
-require_once AROOT.'lib/Pdb.php';
 Pdb::setConfig($config['pdb']);
+ORM::configure($config['pdb']['dsn']);
+ORM::configure($config['pdb']['username']);
+ORM::configure($config['pdb']['password']);
 
 require_once AROOT.'lib/db.function.php';
 require_once AROOT.'lib/core.class.php';
 
 $role_id = get_set($_SESSION['se_role_id']);
 if ($role_id) {
-    include_once _class('Role');
     $role = new Role($role_id);
     $role_info = $role->getInfo();
     fill_empty($role_info['avatar'], $config['default_avatar']);
@@ -28,7 +29,6 @@ if ($role_id) {
 
 $has_login = 0; // 那就总是lognin？？
 $user_id = get_set($_SESSION['se_user_id']);
-require_once _class('User');
 if ($user_id && isset($_SESSION['se_user_name'])) {
     $has_login = 1;
     $user = new User($user_id);
@@ -48,5 +48,4 @@ if ($user_id && isset($_SESSION['se_user_name'])) {
     $user_id = $_SESSION['se_user_id'] = $user->getId(); // 确保 $user_id有值
 }
 
-require_once _class('Perm');
 $perm = Perm::getByUserKind(get_set($user_info['kind']));

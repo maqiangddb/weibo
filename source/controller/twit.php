@@ -8,8 +8,6 @@
 
 $id = get_set($uri_arr[1]);
 
-require_once _class('Twit');
-require_once _class('Role');
 
 $validate_twit = $id && is_numeric($id);
 if ($validate_twit) {

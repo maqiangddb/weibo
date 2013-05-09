@@ -9,10 +9,10 @@
  * @author  ryan <cumt.xiaochi@gmail.com>
  * @created Jul 23, 2012 1:18:01 PM
  */
-class User {
+class User extends Model {
 
-    private $id = null;
-    private $table = 'user';
+    protected $id = null;
+    protected $table = 'user';
 
     public static function get($platform, $id) {
         //....

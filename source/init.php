@@ -3,11 +3,13 @@
 
 // load model classes and more
 spl_autoload_register(function ($name) {
-    $lib_class = _lib($name);
-    if (file_exists(_lib($name)) {
+    $class_map = array(
+        'ORM' => 'idiorm',
+    );
+    $name = isset($class_map[$name]) ? $class_map[$name] : $name;
+    if (file_exists(_lib($name))) {
         require_once _lib($name);
-    } else (file_exists(_model($name))) {
-        require_once _lib('Model');
+    } elseif (file_exists(_model($name))) {
         require_once _model($name);
     }
 });

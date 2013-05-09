@@ -107,11 +107,9 @@ class Twit extends CoreModel {
         $orgin->plusOne('retweet_num');
 
         $ip = $_SERVER['REMOTE_ADDR'];
-        require_once _class('Log');
         Log::update($ip, $role_id);
 
         if ($scene) {
-            require _class('Scene');
             $scene = new Scene($scene);
             $scene->hit();
         }
@@ -200,7 +198,6 @@ class Twit extends CoreModel {
             } else {
                 $ret[$k]['origin'] = null;
             }
-            require_once _class('Role');
             $role = new Role($tw['role_id']);
             $ret[$k]['tag'] = $role->getTags();
         }

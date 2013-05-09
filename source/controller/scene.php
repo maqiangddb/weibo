@@ -9,7 +9,6 @@
 
 $id = get_set($uri_arr[1]);
 
-require_once _class('Scene');
 $validate_scene = $id && is_numeric($id);
 if ($validate_scene) {
     $scene = new Scene($id);
@@ -24,7 +23,6 @@ switch ($method) {
         if ($is_post) {
             extract(user_input($_POST, array('name', 'description')));
             if ($name) {
-                require_once _class('Scene');
                 Scene::creat($name, $description);
                 redirect($rooturl.'scene'); // config root url=>rooturl
             }

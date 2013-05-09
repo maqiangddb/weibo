@@ -6,8 +6,6 @@
  * @created Jul 17, 2012 10:04:46 AM
  */
 
-require_once _class('Role');
-require_once _class('User');
 
 $base_url = ROOT.'role/'; // TODO
 
@@ -131,7 +129,6 @@ if ($validate_role) {
     if ($is_ajax) {
         out_json($role_list);
     } else {
-        require_once _class('Xcon');
         $top_roles = Xcon::parse(get_set($_COOKIE['top_role']));
         $role_list = array_map(function ($role) use($top_roles) {
             $role['top'] = in_array($role['id'], $top_roles)? 1 : 0;

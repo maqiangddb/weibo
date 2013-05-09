@@ -8,10 +8,10 @@
  * @author  ryan <cumt.xiaochi@gmail.com>
  * @created Jul 26, 2012 10:39:27 AM
  */
-class Scene {
+class Scene extends Model {
 
-    private $id = 0;
-    private $table = 'scene';
+    protected $id = 0;
+    protected $table = 'scene';
 
     function __construct($id) {
         $this->id = $id;

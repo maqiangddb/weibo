@@ -1,7 +1,6 @@
 <?php
 !defined('IN_KC') && exit('Access Denied');
 
-require_once 'model/Model.php';
 
 /**
  * Description of Role
@@ -84,7 +83,6 @@ class Role extends Model {
         $orders[] = 'role.id DESC';
         $tables = array('role');
         if ($tag) {
-            require_once _class('Tag');
             $conds['role_tag_relation.tag=?'] = Tag::getIdByText($tag);
             $conds['role_tag_relation.role=role.id'] = false;
             $tables[] = 'role_tag_relation';
@@ -110,32 +108,27 @@ class Role extends Model {
         Pdb::insert($arr, 'twit');
 
         $ip = $_SERVER['REMOTE_ADDR'];
-        require_once _class('Log');
         Log::update($ip, $this->id);
 
         if ($scene) {
-            require_once _class('Scene');
             $scene = new Scene($scene);
             $scene->hit(); // 我被青春撞了一下腰
         }
     }
 
     public function top() {
-        require_once _class('Xcon');
         $roles = new Xcon(get_set($_COOKIE['top_role']));
         $roles->push($this->id);
         setcookie('top_role', $roles->stringify(), time() + 3600*24*365);
     }
 
     public function untop() {
-        require_once _class('Xcon');
         $roles = new Xcon(get_set($_COOKIE['top_role']));
         $roles->del($this->id);
         setcookie('top_role', $roles->stringify(), time() + 3600*24*180);
     }
 
     public function addTag($tag) {
-        require_once _class('Tag');
         $tag_id = Tag::getIdByText($tag);
         //....
         Pdb::insert(array(
@@ -169,7 +162,6 @@ class Role extends Model {
             'num'=>10,
             'role'=>$this->id,
         ), $conds);
-        require_once _class('Twit');
         return Twit::listT($conds);
     }
 

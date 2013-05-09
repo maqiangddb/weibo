@@ -9,7 +9,13 @@ class Model {
     
     protected $id = null;
     protected $info = null;
+
+    public static function get($id)
+    {
+        return ORM::for_table(static::table())->find_one($id);
+    }
     
+    // 已废弃
     function __construct($para) {
         if (is_array($para) && isset($para['id'])) { // info array
             $this->id = $para['id'];

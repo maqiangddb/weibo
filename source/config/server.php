@@ -19,7 +19,8 @@ $config['pdb'] = array(
     'dsn' => 'mysql:'.implode(';', array('host='.SAE_MYSQL_HOST_M, 'port='.SAE_MYSQL_PORT, 'dbname='.SAE_MYSQL_DB)),
     'dsn_s' => 'mysql:'.implode(';', array('host='.SAE_MYSQL_HOST_S, 'port='.SAE_MYSQL_PORT, 'dbname='.SAE_MYSQL_DB)),
     'username' => SAE_MYSQL_USER,
-    'pwd' => SAE_MYSQL_PASS
+    'pwd' => SAE_MYSQL_PASS,
+    'password' => SAE_MYSQL_PASS
 );
 
 // rely on sever

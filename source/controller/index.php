@@ -12,7 +12,6 @@ switch (get_set($_REQUEST['method'])) {
 }
 
 // scene
-require_once _class('Scene');
 $scenes = Scene::ListS();
 
 // twit list
@@ -27,8 +26,6 @@ if ($scene_id) {
 $offset = get_set($_GET['offset'], 0);
 $per_page = 30;
 
-require_once _class('Twit');
-require_once _class('Paginate');
 $paginate = new Paginate($per_page, Twit::getTotal($conds), $offset);
 
 if ($control == 'hot') {
@@ -47,7 +44,6 @@ $twit_list = array_map(function ($t) use($user_id) {
 }, $twit_list);
 
 if ($has_login) {
-    require_once _class('User');
     $user = new User($user_id);
     $reminds = $user->getReminds();
     $reminds = array_filter($reminds, function ($r) {
