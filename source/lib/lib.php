@@ -356,13 +356,25 @@ function sae_log($msg){
     sae_set_display_errors(true);//记录日志后再打开信息输出，否则会阻止正常的错误信息的显示
 }
 
-function _get($key, $or = null) {
+function _get($key, $or = null) 
+{
     return isset($_GET[$key]) ? $_GET[$key] : $or;
 }
-function _post($key, $or = null) {
+function _post($key, $or = null) 
+{
     return isset($_POST[$key]) ? $_POST[$key] : $or;
 }
-function _req($key, $or = null) {
+function _req($key, $or = null) 
+{
     return isset($_REQUEST[$key]) ? $_REQUEST[$key] : $or;
 }
 
+function _last_controller()
+{
+    $ifs = get_included_files();
+    $i = count($ifs);
+    while ($i && !preg_match('%[/\\\\]controller[/\\\\](.+)\.php$%', $ifs[--$i], $matches)) {
+        ;
+    }
+    return $matches[1];
+}

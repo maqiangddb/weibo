@@ -30,18 +30,15 @@ include _controller('init');
 
 if (isset($force_redirect)) { // 强制跳转 这个在整站关闭的时候也很有用啊
     include _controller($force_redirect);
-    $template = _tpl($force_redirect);
 } else {
     // 查看是否是合法的$control，如是，则包含文件，如否，则跳转向404页面
     $control = isset($config['controls'][$control]) ? $config['controls'][$control] : $control;
     if (file_exists(_controller($control))) {
         include _controller($control);
-        if (!isset($template))
-        $template = _tpl($control); // 默认的template
     }else {
         // 404
         include _controller('page404');
-        $template = _tpl('page404');
     }
 }
+$template = _tpl(_last_controller());
 include _tpl('master');
