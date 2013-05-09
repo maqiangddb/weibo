@@ -10,11 +10,15 @@ if (count($_FILES) == 0 || !isset($_FILES['avatar'])) {
     die;
 }
 
-$_f = $_FILES['avatar'];
-$ext = file_ext($_f['name']);
-$new_name = uniqid().".$ext";
-$fpath = write_upload(file_get_contents($_f['tmp_name']), $new_name);
-
+$fpath = make_image(
+    'avatar', 
+    array(
+        'width' => 74,
+        'height' => 74,
+        'crop' => 1,
+        'resize' => 1,
+    )
+);
 echo json_encode(array('path' => $fpath));
 exit;
 

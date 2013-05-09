@@ -213,6 +213,9 @@ function make_image2($imagefile, $opt = array())
     return _make_image($tmp_img, $image_type, $extention, $opt);
 }
 
+/**
+ * @param string $tmp_img 文件内容
+ */
 function _make_image($tmp_img, $image_type, $extention, $opt)
 {
     $resize = $opt['resize'];
