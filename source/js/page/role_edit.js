@@ -3,7 +3,7 @@ $(function () {
         dataType: 'json',
         start: function () {
             var upload = $('label[for=avatar_upload]')
-                .text('载入中...');
+                .text('载入中...').prop('disabled', true);
         },
         done: function (e, data) {
             $('.info img').attr('src', data.result.path);
@@ -15,7 +15,7 @@ $(function () {
                     value: data.result.path
                 },
                 function (ret) {
-                    $('label[for=avatar_upload]').text('更换头像');
+                    $('label[for=avatar_upload]').text('更换头像').prop('disabled', false);
                 }
             );
         }
@@ -29,7 +29,6 @@ $(function () {
                 value: $(this).prop('checked') ? 1 : 0
             },
             function (ret) {
-                console.log('ok');
             }
         );
     });
