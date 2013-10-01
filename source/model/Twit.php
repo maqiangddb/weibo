@@ -137,30 +137,5 @@ class Twit extends CoreModel {
         }
         return $o;
     }
-
-
-    public function up($user_id, $temperature=1) { // 可以用接口
-        $this->hot(1);
-        //....
-        // 已经顶过
-        Pdb::insert(array('user'=>$user_id,'twit'=>$this->id,), 'user_up_twit');
-    }
-
-    public function hot($temperature=1) {
-        //....
-        Pdb::update(array("hot=hot+$temperature"=>null), $this->table, array('id=?'=>$this->id));
-        if (rand(1, 1000) == 23) { // 千分之一的几率冷却
-            Pdb::update(array('hot=hot/2'), $this->table); // 效率问题？ where hot > 8???
-        }
-    }
-
-    public function canUpBy($user_id) {
-        //....
-        return !Pdb::exists('user_up_twit', array(
-            'user=?'=>$user_id,
-            'twit=?'=>$this->id,
-        ));
-    }
 }
 
-?>
