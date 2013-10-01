@@ -9,11 +9,8 @@ class indexController
 {
     public function indexAction()
     {
-        $twit_list = Twit::listForIndex($per_page, $offset);
-        search()
-            ->limit($per_page)
-            ->offset($offset)
-            ->findMany();
+        $twit_list = Twit::getListForIndex($per_page, $offset);
+
         listT(array_merge(array('num'=>$per_page, 'offset'=>$offset), $conds));
         $twit_list = array_map(function ($t) use($user_id) {
             $t['time'] = friendly_time2($t['time']);

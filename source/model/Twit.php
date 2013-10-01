@@ -40,7 +40,7 @@ class Twit extends CoreModel {
         if ($r['origin'] && $origin_explode) {
             $origin = new self($r['origin']);
             $origin = $origin->getInfo();
-            $origin['text'] = self::addLink($origin['text']);
+            $origin['text'] = self::formatHtml($origin['text']);
             $r['origin'] = $origin;
         }
         return $r;
@@ -64,12 +64,12 @@ class Twit extends CoreModel {
         );
         $orders = array('`comment`.`time` ASC');
         return array_map(function ($comment) {
-            $comment['text'] = Twit::addLink($comment['text']);
+            $comment['text'] = Twit::formatHtml($comment['text']);
             return $comment;
         }, Pdb::fetchAll($fields, $tables, $conds, $orders));
     }
 
-    public static function addLink($text) { // this should be private, but...
+    public static function formatHtml($text) { // this should be private, but...
         return preg_replace("/(@[^\s]+)(\sv)?($|\s)/", '[$1$2]', $text);
     }
 
@@ -147,7 +147,7 @@ class Twit extends CoreModel {
         return Pdb::count('twit');
     }
 
-    public static function listForIndex($num = 10, $offset = 0) {
+    public static function getListForIndex($num = 10, $offset = 0) {
         $ret = self::search()
             ->join('role', array('role.id', 'twit.role_id'))
             ->
@@ -156,13 +156,13 @@ class Twit extends CoreModel {
             ->order(array('role.id' => 'DESC'))
             ->findMany();
 
-        foreach($ret as $k=>$tw) {
-            $ret[$k]['text'] = self::addLink($ret[$k]['text']);
+        foreach($ret as $k => $tw) {
+            $ret[$k]['text'] = self::formatHtml($ret[$k]['text']);
             $origin = $tw['origin'];
             if ($origin) {
                 $origin = new self($origin);
                 $origin = $origin->getInfo();
-                $origin['text'] = self::addLink($origin['text']);
+                $origin['text'] = self::formatHtml($origin['text']);
                 $ret[$k]['origin'] = $origin;
             } else {
                 $ret[$k]['origin'] = null;
