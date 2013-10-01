@@ -147,46 +147,15 @@ class Twit extends CoreModel {
         return Pdb::count('twit');
     }
 
-    public static function listT($conds=array()) {
-        extract(self::defaultConds($conds));
-        //....
-        $fields = array(
-            "role.name as author",
-            "role.id as role_id",
-            "role.avatar",
-            "role.is_v",
-            "twit.origin",
-            "twit.text",
-            "twit.image",
-            "twit.comment_num",
-            "twit.retweet_num",
-            "twit.time",
-            "twit.id",
-            "twit.will_del",
-            "IF(scene.id=0,'',scene.name) as scene",
-            "scene.id as scene_id",
-        );
-        $tables = '(role, twit) LEFT JOIN scene ON (twit.scene=scene.id)';
-        $conds = array(
-            'twit.author=role.id'=>false,
-        );
-        if ($scene != -1) {
-            $conds['twit.scene=?'] = $scene;
-        }
-        if ($will_del) {
-            $conds['twit.will_del=?'] = 1;
-        }
-        if ($role) {
-            $conds['role.id=?'] = $role;
-        }
+    public static function listForIndex($num = 10, $offset = 0) {
+        $ret = self::search()
+            ->join('role', array('role.id', 'twit.role_id'))
+            ->
+            ->limit($per_page)
+            ->offset($offset)
+            ->order(array('role.id' => 'DESC'))
+            ->findMany();
 
-        $orders = array();
-        if ($hot) {
-            $orders[] = 'twit.hot DESC';
-        }
-        $orders[] = 'time DESC';
-        $page_pos = "LIMIT $num OFFSET $offset";
-        $ret = Pdb::fetchAll($fields, $tables, $conds, $orders, $page_pos);
         foreach($ret as $k=>$tw) {
             $ret[$k]['text'] = self::addLink($ret[$k]['text']);
             $origin = $tw['origin'];

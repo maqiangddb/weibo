@@ -9,24 +9,12 @@ class indexController
 {
     public function indexAction()
     {
-        // twit list
-        extract(user_input($_GET, 'scene'));
-        $scene_id = $scene;
-        $conds = array();
-        if ($scene_id) {
-            $conds['scene'] = $scene_id;
-            $scene = new Scene($scene_id);
-            $scene_info = $scene->getInfo();
-        }
-        $offset = get_set($_GET['offset'], 0);
-        $per_page = 30;
-
-        $paginate = new Paginate($per_page, Twit::getTotal($conds), $offset);
-
-        if ($control == 'hot') {
-            $conds['hot'] = 1;
-        }
-        $twit_list = Twit::listT(array_merge(array('num'=>$per_page, 'offset'=>$offset), $conds));
+        $twit_list = Twit::listForIndex($per_page, $offset);
+        search()
+            ->limit($per_page)
+            ->offset($offset)
+            ->findMany();
+        listT(array_merge(array('num'=>$per_page, 'offset'=>$offset), $conds));
         $twit_list = array_map(function ($t) use($user_id) {
             $t['time'] = friendly_time2($t['time']);
             if ($t['origin']) {
