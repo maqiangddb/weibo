@@ -9,10 +9,6 @@ class indexController
 {
     public function indexAction()
     {
-
-        // scene
-        $scenes = Scene::listForIndex();
-
         // twit list
         extract(user_input($_GET, 'scene'));
         $scene_id = $scene;
