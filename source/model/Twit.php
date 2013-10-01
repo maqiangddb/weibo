@@ -138,28 +138,6 @@ class Twit extends CoreModel {
         return $o;
     }
 
-    public static function count($para) {
-        extract(user_input($para, array('time', 'interval')));
-        //....
-        if ($time) {
-            $conds = array('time>?'=>$time);
-        }
-        if ($interval) {
-            $conds = array('time>DATE_SUB(NOW(),INTERVAL ? SECOND)'=>$interval);
-        }
-        return Pdb::count('twit', $conds);
-    }
-
-    private static function defaultConds($conds) {
-        return array_merge(array(
-            'num'=>15, //和新浪一样
-            'offset'=>0,
-            'scene'=>-1,
-            'will_del'=>null,
-            'role'=>null,
-            'hot'=>0,
-        ), $conds);
-    }
 
     public function up($user_id, $temperature=1) { // 可以用接口
         $this->hot(1);
