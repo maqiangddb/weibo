@@ -11,40 +11,7 @@
  */
 class Twit extends CoreModel {
 
-    protected $table = 'twit';
-
-    const ORIGIN_EXPLODE = 1;
-
-    public function getInfo($origin_explode=1) {
-        //....
-        $fields = array(
-            'role.name as author',
-            'role.id as role_id',
-            'role.avatar',
-            'role.is_v',
-            'twit.text',
-            'twit.image',
-            'twit.comment_num',
-            'twit.retweet_num',
-            'twit.origin',
-            'twit.scene',
-            'twit.time',
-            'twit.will_del',
-        );
-        $tables = array('role', 'twit');
-        $conds = array(
-            "twit.id=?"=>$this->id,
-            'twit.author=role.id'=>false,
-        );
-        $r = Pdb::fetchRow($fields, $tables, $conds);
-        if ($r['origin'] && $origin_explode) {
-            $origin = new self($r['origin']);
-            $origin = $origin->getInfo();
-            $origin['text'] = self::formatHtml($origin['text']);
-            $r['origin'] = $origin;
-        }
-        return $r;
-    }
+    protected static $table = 'twit';
 
     public function getComments() {
         //....
