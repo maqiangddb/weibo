@@ -81,54 +81,6 @@ function static_source_version($type='css') {
     }
 }
 
-/** translate Y-m-d to xx之前 or 今天XX
- *
- * @param type $date_time_str 形如 Y-m-d H:i:s （sql中获得的DateTime类型即可）
- */
-function friendly_time2($date_time_str) {
-    $date_time = new DateTime($date_time_str);
-    $nowtime = new DateTime();
-    $diff = $nowtime->diff($date_time);
-    if ($diff->y==0 && $diff->m==0 && $diff->d==0) { // 同一天
-        if ($diff->h<1) // 一个小时以内
-            if ($diff->i==0) // 一分钟以内
-                return '刚刚';
-            else
-                return $diff->i.'分钟前'; // minutes
-        else
-            return '今天';
-    } else {
-        return current(explode(' ', $date_time_str));
-    }
-}
-
-function d($param, $var_dump=0) {
-    global $config;
-    if (DEBUG) {
-        echo "<p><pre>\n";
-        if ($var_dump) {
-            var_dump($param);
-        } else {
-            print_r($param);
-        }
-        echo "</p></pre>\n";
-    } else {
-        return;
-    }
-}
-
-function user_input($arr, $para_list) {
-    if (!is_array($para_list)) {
-        $para_list = array($para_list);
-    }
-    $ret = array();
-    foreach ($para_list as $p) {
-        $ret[$p] = trim(get_set($arr[$p]));
-    }
-    return $ret;
-}
-
-
 /* image upload helpers */
 
 /**
