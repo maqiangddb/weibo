@@ -156,21 +156,25 @@ class Twit extends CoreModel {
             ->order(array('role.id' => 'DESC'))
             ->findMany();
 
-        foreach($ret as $k => $tw) {
-            $ret[$k]['text'] = self::formatHtml($ret[$k]['text']);
+        foreach($ret as $k => &$tw) {
+            $tw['text'] = self::formatHtml($tw['text']);
             $origin = $tw['origin'];
             if ($origin) {
-                $origin = new self($origin);
-                $origin = $origin->getInfo();
-                $origin['text'] = self::formatHtml($origin['text']);
-                $ret[$k]['origin'] = $origin;
-            } else {
-                $ret[$k]['origin'] = null;
+                $tw['origin'] = self::findOrigin($origin);
             }
             $role = new Role($tw['role_id']);
             $ret[$k]['tag'] = $role->getTags();
         }
         return $ret;
+    }
+
+    public static function fromArray($arr)
+    {
+        $o = parent::fromArray($arr);
+        if ($o->origin) {
+            $o->orgin = self::findOne($arr);
+        }
+        return $o;
     }
 
     public static function count($para) {

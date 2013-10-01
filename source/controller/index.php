@@ -11,7 +11,6 @@ class indexController
     {
         $twit_list = Twit::getListForIndex($per_page, $offset);
 
-        listT(array_merge(array('num'=>$per_page, 'offset'=>$offset), $conds));
         $twit_list = array_map(function ($t) use($user_id) {
             $t['time'] = friendly_time2($t['time']);
             if ($t['origin']) {
