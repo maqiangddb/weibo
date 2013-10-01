@@ -124,13 +124,7 @@ class Twit extends CoreModel {
             ->findMany();
 
         foreach($ret as $k => &$tw) {
-            $tw['text'] = self::formatHtml($tw['text']);
-            $origin = $tw['origin'];
-            if ($origin) {
-                $tw['origin'] = self::findOrigin($origin);
-            }
-            $role = new Role($tw['role_id']);
-            $ret[$k]['tag'] = $role->getTags();
+            $tw->text = self::formatHtml($tw->text);
         }
         return $ret;
     }
