@@ -70,36 +70,6 @@ class Twit extends Model {
         return $t->id;
     }
 
-    private function plusOne($para) {
-        //....
-        $arr = array("$para=$para+1"=>false); // null is better than false
-        $conds = array('id=?'=>$this->id);
-        Pdb::update($arr, 'twit', $conds);
-    }
-
-    public function del() {
-        //....
-        $conds = array('id=?'=>$this->id);
-        return Pdb::del($this->table, $conds);
-    }
-
-    public function prepareDel($will_del=1) {
-        //....
-        $conds = array('id=?'=>$this->id);
-        Pdb::update(compact('will_del'), $this->table, $conds);
-    }
-
-    public function edit($arr) {
-        //....
-        $conds = array("id=?"=>$this->id);
-        Pdb::update($arr, 'twit', $conds);
-    }
-
-    public static function getTotal() {
-        //....
-        return Pdb::count('twit');
-    }
-
     public static function getListForIndex($num = 10, $offset = 0) {
         $ret = self::search()
             ->join('role', array('role.id', 'twit.role_id'))
