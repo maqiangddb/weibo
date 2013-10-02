@@ -27,64 +27,30 @@ class Role extends Model {
         return self::search()->where($conds)->findOne();
     }
 
-    public static function listR ($conds=array()) { // list??
-        extract(array_merge(array(
-            'keyword' => '',
-            'num'     => 6,
-            'view_from'=>0,
-            'tag'=>'',
-        ), $conds));
-        //....
-        $conds = array();
-        $fields = array(
-            'role.id',
-            'role.name',
-            'role.avatar',
-            'role.is_v',
-            'role.hot',
-        );
-        $orders = array();
-        if ($keyword) {
-            $conds['role.name LIKE ?'] = "%$keyword%";
-            $fields[] = 'IF(role.name=?, 1, 0) as found';
-            $conds = array_merge(array('1=1'=>$keyword), $conds);
-            $orders[] = 'found DESC';
-        }
-        $orders[] = 'role.hot DESC';
-        $orders[] = 'role.id DESC';
-        $tables = array('role');
-        if ($tag) {
-            $conds['role_tag_relation.tag=?'] = Tag::getIdByText($tag);
-            $conds['role_tag_relation.role=role.id'] = false;
-            $tables[] = 'role_tag_relation';
-        }
-        $r = Pdb::fetchAll($fields, $tables, $conds, $orders, "LIMIT $num");
-        return array_map(function ($role) {
-            $role_o = new Role($role['id']);
-            $role['tag'] = $role_o->getTags();
-            return $role;
-        }, $r);
+    public static function getListForRoleIndex($limit, $offset)
+    {
+        return self::search()->limit($limit)->offset($offset)->findMany();
     }
 
-    public function tweet ($text, $image_path='', $scene=0) {
+    public static function getListLikeName($name)
+    {
+        return self::search()->where('name', 'like', "%$name%")->findMany();
+    }
+
+    public function creatTweet ($args) {
 
         //....
-        $arr = array(
-            'author' => $this->id,
-            'text' => $text,
-            'image' => $image_path,
-            'scene' => $scene,
-            'time=NOW()'=>false,
-        );
-        Pdb::insert($arr, 'twit');
+        $t = Twit::create();
+        $t->author = $this->id;
+        $t->text = $args['text'];
+        $t->setExpr('time', 'NOW()');
+        $t->save();
 
-        $ip = $_SERVER['REMOTE_ADDR'];
-        Log::update($ip, $this->id);
-
-        if ($scene) {
-            $scene = new Scene($scene);
-            $scene->hit(); // 我被青春撞了一下腰
-        }
+        $log = Log::create();
+        $log->ip = $args['ip'];
+        $log->role_id = $this->id;
+        $log->twit_id = $t->id;
+        $log->save();
     }
 
     public function top() {
