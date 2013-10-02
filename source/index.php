@@ -13,7 +13,7 @@ error_reporting(E_ALL);
 
 use ptf\Application;
 
-if (defined('APP_NAME')) {
+if (isset($_SERVER['HTTP_APPNAME'])) {
     define('DEPLOY_ENV', 'prd');
 } else {
     define('DEPLOY_ENV', 'dev');
