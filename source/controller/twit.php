@@ -21,30 +21,20 @@ class twitController extends baseController
 
     public function commentAction()
     {
-        if ($is_post) {
-            extract(user_input($_POST, 'text'));
-            if ($text && isset($twit)) {
-                $twit->comment($text, $role_id);
-                $stat = 1;
-                $msg = '';
-                if ($is_ajax) {
-                    out_json(compact('msg', 'stat'));
-                }
-            }
-        } else if ($is_ajax) { // get
-            $comments = $twit->getComments();
-            $comments = array_map(function ($e) use($config) {
-                fill_empty($e['avatar'], $config['default_avatar']);
-                return $e;
-            }, $comments);
-            include _block('comment_list');
-            exit;
+        $twit = Twit::findOne($this->param('twit_id'));
+        if ($twit) {
+            $args = $this->param(array('text', 'twit_id', 'role_id'));
+            Comment::add($args);
+            $twit = Twit::findOne($args['twit_id']);
+            $this->comments = $twit->getComments();
+            return $this->renderView('comment_list');
+        } else {
+            return false;
         }
     }
 }
 
 $id = get_set($uri_arr[1]);
-
 
 $validate_twit = $id && is_numeric($id);
 if ($validate_twit) {
