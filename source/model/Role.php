@@ -36,22 +36,6 @@ class Role extends Model {
         return self::search()->where('name', 'like', "%$name%")->findMany();
     }
 
-    public function creatTweet ($args) {
-
-        //....
-        $t = Twit::create();
-        $t->author = $this->id;
-        $t->text = $args['text'];
-        $t->setExpr('time', 'NOW()');
-        $t->save();
-
-        $log = Log::create();
-        $log->ip = $args['ip'];
-        $log->role_id = $this->id;
-        $log->twit_id = $t->id;
-        $log->save();
-    }
-
     public static function getByName($name) {
         return self::search()->where('name', $name)->findOne();
     }

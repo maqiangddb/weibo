@@ -5,6 +5,44 @@
  * @created Jul 17, 2012 4:26:14 PM
  */
 
+class twitController extends baseController
+{
+    public function addAction()
+    {
+        $role = Role::currentRole();
+        if ($role) {
+            $args = $this->param(array('text'));
+            $args['role_id'] = $role->id;
+            $args['ip'] = $this->ip();
+            Twit::add($args);
+        }
+        $this->redirect('index');
+    }
+
+    public function commentAction()
+    {
+        if ($is_post) {
+            extract(user_input($_POST, 'text'));
+            if ($text && isset($twit)) {
+                $twit->comment($text, $role_id);
+                $stat = 1;
+                $msg = '';
+                if ($is_ajax) {
+                    out_json(compact('msg', 'stat'));
+                }
+            }
+        } else if ($is_ajax) { // get
+            $comments = $twit->getComments();
+            $comments = array_map(function ($e) use($config) {
+                fill_empty($e['avatar'], $config['default_avatar']);
+                return $e;
+            }, $comments);
+            include _block('comment_list');
+            exit;
+        }
+    }
+}
+
 $id = get_set($uri_arr[1]);
 
 
@@ -14,20 +52,6 @@ if ($validate_twit) {
 }
 
 switch (get_set($_REQUEST['method'])) {
-    case 'post': // add
-        extract(user_input($_POST, array('text', 'scene', 'image_src')));
-        if ($text || ($image_src)) {
-            $role = new Role($role_id);
-            $role->tweet($text, $image_src, $scene);
-        }
-        redirect('index?scene='.$scene);
-        break;
-    case 'edit':
-        $arr = (user_input($_POST, array('comment_num', 'retweet_num')));
-        if ($arr) {
-            $twit->edit($arr);
-        }
-        break;
     case 'comment':
         if ($is_post) {
             extract(user_input($_POST, 'text'));

@@ -13,6 +13,22 @@ class Twit extends Model {
 
     protected static $table = 'twit';
 
+
+    public function add ($args) {
+
+        $t = self::create();
+        $t->role_id = $args['role_id'];
+        $t->text = $args['text'];
+        $t->setExpr('created', 'NOW()');
+        $t->save();
+
+        $log = Log::create();
+        $log->ip = $args['ip'];
+        $log->role_id = $args['role_id'];
+        $log->twit_id = $t->id;
+        $log->save();
+    }
+
     public function getComments() {
         return Comment::search()
             ->where('twit_id', $this->id())
