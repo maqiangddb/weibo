@@ -12,6 +12,6 @@ class IndexController extends BaseController
         $p = $this->param('p', 1);
         $n = $this->param('n', 100);
         $this->twits = Twit::getListForIndex($n, $p);
-        $this->rendView();
+        $this->renderView('index/index');
     }
 }
