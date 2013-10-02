@@ -51,47 +51,9 @@ class Role extends Model {
         $log->save();
     }
 
-    public static function getIdByName($name) {
-        //....
-        $r = Pdb::fetchRow('id', 'role', array('name=?'=>$name));
-        return $r? $r['id'] : $r;
+    public static function getByName($name) {
+        return self::search()->where('name', $name)->findOne();
     }
 
-    public function hot() {
-        //....
-        Pdb::update(array('hot=hot+1'=>null), self::$table, array('id=?'=>$this->id));
-        if (rand(1, 1000) == 23) { // 千分之一的几率冷却
-            Pdb::update(array('hot=hot/2'), self::$table);
-        }
-    }
-    
-    public function addToHistory() {
-        $history = array();
-        if (isset($_COOKIE['rh'])) { // role history
-            $history = json_decode($_COOKIE['rh']);
-        }
-        array_unshift($history, $this->id);
-        $history = array_unique($history);
-        while (count($history) > 3) {
-            array_pop($history);
-        }
-        
-        $historyStr = json_encode(array_values($history));
-        if (!setcookie('rh', $historyStr, strtotime('+180 days'), ROOT)) { // 180 days
-            throw new Exception('set cookie fail');
-        }
-    }
-    
-    public function __get($name) {
-        if ($name == 'id') return $this->id;
-        if (empty($this->info)) $this->info = $this->info();
-        return $this->info[$name];
-    }
-    
-    public function info() {
-        if (!empty($this->info)) return $this->info;
-        return Pdb::fetchRow('*', self::$table, $this->selfCond());
-    }
 }
 
-?>
