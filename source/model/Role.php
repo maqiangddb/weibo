@@ -11,27 +11,20 @@
  */
 class Role extends Model {
 
-    static $table = 'role';
+    public static $table = 'role';
 
-    public function getInfo($whose_view=0) {
-        $conds = array("id=?"=>$this->id);
-        $r = Pdb::fetchRow('*', self::$table, $conds);
-        if ($whose_view) {
-            $user_id = $whose_view;
-            $r['watch'] = $this->watchBy($user_id);
+    public static function getCurrentRole()
+    {
+        if (isset($_SESSION['se_role_id']) && $_SESSION['se_role_id']) {
+            return self::findOne($_SESSION['se_role_id']);
         }
-        return $r;
+        return null;
     }
 
     public static function hasName($name)
     {
-        $conds = array('name=?' => $name);
-        $r = Pdb::fetchRow('*', self::$table, $conds);
-        if ($r) {
-            return new self($r);
-        } else {
-            return false;
-        }
+        $conds = array('name' => $name);
+        return self::search()->where($conds)->findOne();
     }
 
     private function watchBy($user_id) {
