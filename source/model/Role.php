@@ -56,5 +56,10 @@ class Role extends Model {
         return self::search()->where('name', $name)->findOne();
     }
 
+    public function play()
+    {
+        $_SESSION['se_role_id'] = $this->id;
+    }
+
 }
 
