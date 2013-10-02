@@ -53,35 +53,20 @@ class Twit extends Model {
         $this->hot(2);
     }
 
-    public function retweet($text, $role_id) {
-        //....
-        $info = $this->getInfo(!self::ORIGIN_EXPLODE);
-        $origin_id = $this->id;
-        $scene = $info['scene'];
-        if ($info['origin'] != 0) { // is origin
-            $text .= '//@'.$info['author'].($info['is_v']?' v':'').' ：'.$info['text'];
-            $origin_id = $info['origin'];
-        }
-        $arr = array(
-            'origin'     => $origin_id,
-            'text'       => $text,
-            'author'     => $role_id,
-            'scene'      => $scene,
-            'time=NOW()' => null,
-        );
-        Pdb::insert($arr, 'twit');
-        $orgin = new self($this->id);
-        $orgin->plusOne('retweet_num');
+    public function retweet($args) {
+        $t = self::create();
+        $t->role_id = $args['role_id'];
+        $t->orgin = $this->id;
+        $t->setExpr('created', 'NOW()');
+        $t->save();
 
-        $ip = $_SERVER['REMOTE_ADDR'];
-        Log::update($ip, $role_id);
-
-        if ($scene) {
-            $scene = new Scene($scene);
-            $scene->hit();
-        }
-
-        $this->hot(3);
+        $log = Log::create();
+        $log->ip = $args['ip'];
+        $log->role_id = $args['role_id'];
+        $log->twit_id = $t->id;
+        $log->save();
+        
+        return $t->id;
     }
 
     private function plusOne($para) {
