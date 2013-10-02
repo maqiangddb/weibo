@@ -1,5 +1,7 @@
 <?php
 
+use ptf\IdModel;
+
 /**
  * Description of Role
  *
@@ -7,7 +9,7 @@
  * @author  ryan <cumt.xiaochi@gmail.com>
  * @created Jul 17, 2012 10:13:11 AM
  */
-class Role extends Model {
+class Role extends IdModel {
 
     public static $table = 'role';
 

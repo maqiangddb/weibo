@@ -1,9 +1,11 @@
 <?php
 
+use ptf\IdModel;
+
 /**
  * @author  ryan <cumt.xiaochi@gmail.com>
  */
-class Comment extends Model {
+class Comment extends IdModel {
 
     protected static $table = 'comment';
 

@@ -1,6 +1,6 @@
 <?php
 
-!defined('IN_KC') && exit('Access Denied');
+use ptf\IdModel;
 
 /**
  * Description of Twit
@@ -9,7 +9,7 @@
  * @author  ryan <cumt.xiaochi@gmail.com>
  * @created Jul 17, 2012 3:15:17 PM
  */
-class Twit extends Model {
+class Twit extends IdModel {
 
     protected static $table = 'twit';
 
@@ -60,7 +60,6 @@ class Twit extends Model {
     public static function getListForIndex($num = 10, $offset = 0) {
         $ret = self::search()
             ->join('role', array('role.id', 'twit.role_id'))
-            ->
             ->limit($per_page)
             ->offset($offset)
             ->order(array('role.id' => 'DESC'))
