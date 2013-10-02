@@ -13,7 +13,6 @@ class Twit extends IdModel {
 
     protected static $table = 'twit';
 
-
     public function add ($args) {
 
         $t = self::create();
@@ -57,12 +56,12 @@ class Twit extends IdModel {
         return $t->id;
     }
 
-    public static function getListForIndex($num = 10, $offset = 0) {
+    public static function getListForIndex($n = 10, $p = 1) {
         $ret = self::search()
             ->join('role', array('role.id', 'twit.role_id'))
-            ->limit($per_page)
-            ->offset($offset)
-            ->order(array('role.id' => 'DESC'))
+            ->limit($n)
+            ->offset(($p-1)*$n)
+            ->orderBy(array('role.id' => 'DESC'))
             ->findMany();
 
         foreach($ret as $k => &$tw) {
