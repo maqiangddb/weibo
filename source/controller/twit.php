@@ -34,11 +34,10 @@ class twitController extends baseController
     }
 
     public function retweetAction()
-
     {
         $twit = Twit::findOne($this->param('twit_id'));
         if ($twit) {
-            $args = $this->param(array('role_id'));
+            $args = $this->param(array('role_id', 'comment_id'));
             $rs = $twit->retweet($args);
             return $this->json((bool)$rs);
         }

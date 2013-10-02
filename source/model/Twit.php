@@ -56,7 +56,8 @@ class Twit extends Model {
     public function retweet($args) {
         $t = self::create();
         $t->role_id = $args['role_id'];
-        $t->orgin = $this->id;
+        $t->origin_id = $this->id;
+        $t->origin_comment_id = $args['comment_id'];
         $t->setExpr('created', 'NOW()');
         $t->save();
 
@@ -65,7 +66,7 @@ class Twit extends Model {
         $log->role_id = $args['role_id'];
         $log->twit_id = $t->id;
         $log->save();
-        
+
         return $t->id;
     }
 
