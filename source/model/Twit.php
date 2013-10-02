@@ -40,19 +40,6 @@ class Twit extends Model {
         return preg_replace("/(@[^\s]+)(\sv)?($|\s)/", '[$1$2]', $text);
     }
 
-    public function comment($text, $author_id) {
-        //....
-        $arr = array(
-            'twit'=>$this->id,
-            'text'=>$text,
-            'author'=>$author_id,
-            'time=NOW()'=>false,
-        );
-        Pdb::insert($arr, 'comment');
-        $this->plusOne('comment_num');
-        $this->hot(2);
-    }
-
     public function retweet($args) {
         $t = self::create();
         $t->role_id = $args['role_id'];
