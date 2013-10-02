@@ -5,7 +5,7 @@
  * @created Jul 17, 2012 4:26:14 PM
  */
 
-class twitController extends baseController
+class TwitController extends BaseController
 {
     public function addAction()
     {

@@ -1,8 +1,9 @@
 <?php
 
 return array(
-    'db' = array(
+    'db' => array(
         'dsn' => 'mysql:host=localhost;dbname=weibo',
         'username' => 'root',
-        'password' => 'root'
-));
+        'password' => 'root',
+    )
+);
