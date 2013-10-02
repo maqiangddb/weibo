@@ -45,10 +45,3 @@ class twitController extends baseController
     }
 }
 
-$id = get_set($uri_arr[1]);
-
-$validate_twit = $id && is_numeric($id);
-if ($validate_twit) {
-    $twit = new Twit($id);
-}
-

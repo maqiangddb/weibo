@@ -5,7 +5,7 @@
  * @created Jun 30, 2012 11:50:49 AM
  */
 
-class baseController extends Controller
+class BaseController extends Controller
 {
     public function __construct()
     {

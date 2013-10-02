@@ -5,7 +5,7 @@
  * @created Jun 27, 2012 6:24:01 PM
  */
 
-class indexController extends Controller
+class IndexController extends BaseController
 {
     public function indexAction()
     {

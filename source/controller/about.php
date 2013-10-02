@@ -5,3 +5,7 @@
  * @created Jul 18, 2012 10:23:53 PM
  */
 
+class AboutController extends BaseController
+{
+
+}

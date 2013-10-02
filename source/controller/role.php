@@ -5,7 +5,7 @@
  * @created Jul 17, 2012 10:04:46 AM
  */
 
-class roleController extends baseController
+class RoleController extends BaseController
 {
     public function indexAction()
     {

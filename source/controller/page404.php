@@ -5,7 +5,7 @@
  * @author  ryan <cumt.xiaochi@gmail.com>
  * @created Jun 30, 2012 11:13:21 AM
  */
-class page404Controller extends baseController
+class Page404Controller extends BaseController
 {
     public function indexAction()
     {
