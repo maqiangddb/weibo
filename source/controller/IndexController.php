@@ -9,7 +9,9 @@ class IndexController extends BaseController
 {
     public function indexAction()
     {
-        $this->twits = Twit::getListForIndex($per_page, $offset);
+        $p = $this->param('p', 1);
+        $n = $this->param('n', 100);
+        $this->twits = Twit::getListForIndex($n, $p);
         $this->rendView();
     }
 }
