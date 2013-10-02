@@ -27,28 +27,6 @@ class Role extends Model {
         return self::search()->where($conds)->findOne();
     }
 
-    private function watchBy($user_id) {
-        //....
-        return Pdb::exists('watch', array(
-            'user=?'=>$user_id,
-            'role=?'=>$this->id
-        ));
-    }
-
-    public static function add ($name, $avatar='') {
-        if ($name) {
-            Pdb::insert(compact('name', 'avatar'), 'role'); // time???
-            return new self(Pdb::lastInsertId());
-        } else {
-            throw new Exception('name is empty');
-        }
-    }
-
-    public function edit ($arr) {
-        //....
-        Pdb::update($arr, self::$table, array('id=?'=>$this->id));
-    }
-
     public static function listR ($conds=array()) { // list??
         extract(array_merge(array(
             'keyword' => '',
