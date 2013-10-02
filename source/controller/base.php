@@ -15,8 +15,7 @@ class baseController extends Controller
 
         ORM::configure($config['db']);
 
-        $role = Role::getCurrentRole();
-
+        $this->role = Role::getCurrentRole();
     }
 }
 
