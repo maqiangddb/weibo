@@ -1,6 +1,4 @@
 <?php
-!defined('IN_KC') && exit('Access Denied');
-
 
 /**
  * Description of Role
@@ -51,55 +49,6 @@ class Role extends Model {
         $log->role_id = $this->id;
         $log->twit_id = $t->id;
         $log->save();
-    }
-
-    public function top() {
-        $roles = new Xcon(get_set($_COOKIE['top_role']));
-        $roles->push($this->id);
-        setcookie('top_role', $roles->stringify(), time() + 3600*24*365);
-    }
-
-    public function untop() {
-        $roles = new Xcon(get_set($_COOKIE['top_role']));
-        $roles->del($this->id);
-        setcookie('top_role', $roles->stringify(), time() + 3600*24*180);
-    }
-
-    public function addTag($tag) {
-        $tag_id = Tag::getIdByText($tag);
-        //....
-        Pdb::insert(array(
-            'role'=>$this->id,
-            'tag'=>$tag_id,
-        ), 'role_tag_relation', 'ON DUPLICATE KEY UPDATE role=role');
-    }
-
-    public function getTags() {
-        //....
-        $r = Pdb::fetchAll('role_tag.tag', 'role_tag,role,role_tag_relation', array(
-            'role.id=?'=>$this->id,
-            'role.id=role_tag_relation.role'=>false,
-            'role_tag_relation.tag=role_tag.id'=>false
-        ));
-        return array_map(function ($elem) {
-            return $elem['tag'];
-        }, $r);
-    }
-
-    public function countRecentTwit($days=30) {
-        //....
-        return Pdb::count('twit', array(
-            'author=?'=>$this->id,
-            "time>(CURDATE()-INTERVAL $days DAY)"=>false
-        ));
-    }
-
-    public function recentTwit($conds=array()) {
-        $conds = array_merge(array(
-            'num'=>10,
-            'role'=>$this->id,
-        ), $conds);
-        return Twit::listT($conds);
     }
 
     public static function getIdByName($name) {
