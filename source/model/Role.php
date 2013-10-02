@@ -25,9 +25,10 @@ class Role extends Model {
         return self::search()->where($conds)->findOne();
     }
 
-    public static function getListForRoleIndex($limit, $offset)
+    public static function getListForRoleIndex($per_page, $page_index)
     {
-        return self::search()->limit($limit)->offset($offset)->findMany();
+        $offset = ($page_index - 1) * $per_page;
+        return self::search()->limit($per_page)->offset($offset)->findMany();
     }
 
     public static function getListLikeName($name)
