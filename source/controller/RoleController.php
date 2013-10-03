@@ -21,8 +21,7 @@ class RoleController extends BaseController
             if ($role = Role::hasName($name)) {
                 $this->redirect('/role/'.$role->id);
             }
-            $role = Role::create();
-            $role->name = $name;
+            $role = Role::add($this->param(array('name')));
             $this->redirect('/role/' . $role->id);
         }
     }

@@ -47,5 +47,13 @@ class Role extends IdModel {
         $_SESSION['se_role_id'] = $this->id;
     }
 
+    public static function add($args)
+    {
+        $role = self::create();
+        $role->name = $args['name'];
+        $role->save();
+        return $role;
+    }
+
 }
 
