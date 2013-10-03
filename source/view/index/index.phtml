@@ -39,8 +39,8 @@
       </ul>
   </div>
   <div class="paginate">
-      <?php if ($paginate->hasPrevious()) { ?><a href="<?php echo ROOT.'?offset='.$paginate->previousOffset(); ?>">上一页</a><?php } ?>
-      <?php if ($paginate->hasNext()) { ?><a href="<?php echo ROOT.'?offset='.$paginate->nextOffset(); ?>">下一页</a><?php } ?>
+    <?php if ($this->paginate->hasPrevious()) { ?><a href="<?php echo ROOT.'?offset='.$this->paginate->previousOffset(); ?>">上一页</a><?php } ?>
+    <?php if ($this->paginate->hasNext()) { ?><a href="<?php echo ROOT.'?offset='.$this->paginate->nextOffset(); ?>">下一页</a><?php } ?>
   </div>
 </div>
 

@@ -76,6 +76,11 @@ class Twit extends IdModel {
         return $ret;
     }
 
+    public static function getTotalCount()
+    {
+        return self::search()->count();
+    }
+
     public static function fromArray($arr)
     {
         $o = parent::fromArray($arr);
