@@ -7,7 +7,7 @@
  */
 ?>
 <h1 title="伪博扮演 首页">
-  <a href="<?php echo ROOT; ?>">
+  <a href="/">
     <span class="text">伪博扮演</span>
   </a>
 </h1>
@@ -18,9 +18,8 @@
     <img src="<?php echo $this->role->avatar; ?>" />
     <span class="name"><?php echo $this->role->name; ?></span>
   </a>
-  <a href="<?php echo ROOT; ?>role">角色列表</a>
+  <a href="/role/">角色列表</a>
 <?php else: ?>
-  <a href="<?php echo ROOT; ?>role">扮演角色</a>
+  <a href="/role/">扮演角色</a>
 <?php endif ?>
-  <a href="help">Help</a>
 </div>
