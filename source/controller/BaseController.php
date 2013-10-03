@@ -19,6 +19,8 @@ class BaseController extends Controller
         PdoWrapper::config($this->config['db']);
 
         $this->role = Role::getCurrentRole();
+
+        $this->layout('layout/master');
     }
 }
 

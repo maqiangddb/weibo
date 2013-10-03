@@ -1,0 +1,43 @@
+<?php
+/**
+ * @file    master
+ * @author  ryan <cumt.xiaochi@gmail.com>
+ * @created
+ */
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>伪博扮演</title>
+    <meta name="description" content="<?php echo $this->page->description; ?>" />
+    <meta name="keywords" content="<?php echo implode(', ', $this->page->keywords, array()); ?>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <?php if (DEPLOY_ENV == 'prd'): ?>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34837342-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+    <?php endif; ?>
+  </head>
+  <body>
+    <div class="append-parent"><!-- append parent -->
+    </div>
+    <div class="header"><!-- head -->
+      <?php $this->renderBlock('block/header'); ?>
+    </div>
+    <div class="content">
+      <?php $this->yieldView(); ?>
+    </div>
+    <div class="footer"><!-- footer -->
+      <?php $this->renderBlock('block/footer'); ?>
+    </div>
+  </body>
+</html>
