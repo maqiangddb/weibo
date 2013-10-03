@@ -10,8 +10,8 @@ class RoleController extends BaseController
     public function indexAction()
     {
         list($p, $n) = $this->param('p', 'n');
-        $this->roles = Role::getListForIndex($n, $p);
-        $this->renderView();
+        $this->roles = Role::getList($n, $p);
+        $this->renderView('role/index');
     }
 
     public function addAction()

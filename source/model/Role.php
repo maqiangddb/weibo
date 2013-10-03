@@ -27,7 +27,7 @@ class Role extends IdModel {
         return self::search()->where($conds)->findOne();
     }
 
-    public static function getListForRoleIndex($per_page, $page_index)
+    public static function getList($per_page, $page_index)
     {
         $offset = ($page_index - 1) * $per_page;
         return self::search()->limit($per_page)->offset($offset)->findMany();
