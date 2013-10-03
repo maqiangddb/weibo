@@ -21,27 +21,15 @@
     <?php foreach ($this->roles as $role) { ?>
     <dd>
       <div class="info">
-          <a href="<?php echo $rooturl.'role/'.$role['id']; ?>">
-              <img src="<?php echo $role['avatar']?:$config['default_avatar']; ?>" />
-              <span><?php echo $role['name']; ?></span>
-              <?php if ($role['is_v']) { ?><span class="verify">V</span><?php } ?>
-          </a>
+        <a href="<?php echo '/role/'.$role->id; ?>">
+            <img src="<?php echo $role->avatar?:$config['default_avatar']; ?>" />
+            <span><?php echo $role->name; ?></span>
+            <?php if ($role->is_v) { ?><span class="verify">V</span><?php } ?>
+        </a>
       </div>
       <div class="control">
-          <?php if (!$role['top']) { ?>
-          <a href="<?php echo $base_url.$role['id'].'?method=top'; ?>" title="这样就可以一直在上面了，再也不用费心寻找了">置顶</a>
-          <?php } else { ?>
-          <a href="<?php echo $base_url.$role['id'].'?method=untop'; ?>" title="滚到下面">取消置顶</a>
-          <?php } ?>
-          <a href="<?php echo ROOT.'role/'.$role['id']; ?>" title="添加标签，修改角色头像，加V等">角色信息</a><!-- 删除 -->
-          <a class="switch" href="<?php echo ROOT.'role/'.$role['id']; ?>?method=play" title="扮演这个角色">以此身份登录</a><!-- 这里的参数形式也要修改 -->
-      </div>
-      <div class="tag">
-          <ul>
-              <?php foreach ($role['tag'] as $tag) { ?>
-              <li><a href="?tag=<?php echo urlencode($tag); ?>"><?php echo $tag; ?></a></li>
-              <?php } ?>
-          </ul>
+        <a href="<?php echo '/role/'.$role->id ?>" title="添加标签，修改角色头像，加V等">角色信息</a><!-- 删除 -->
+        <a class="switch" href="<?php echo '/role/'.$role->id ?>?method=play" title="扮演这个角色">以此身份登录</a>
       </div>
     </dd>
     <?php } ?>
