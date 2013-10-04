@@ -9,23 +9,24 @@ class TwitController extends BaseController
 {
     public function addAction()
     {
-        $role = Role::currentRole();
+        $role = $this->roleDao->getCurrentRole();
         if ($role) {
             $args = $this->param(array('text'));
             $args['role_id'] = $role->id;
             $args['ip'] = $this->ip();
-            Twit::add($args);
+            $this->twitDao->add($args);
         }
-        $this->redirect('index');
+        exit;
+        $this->redirect('/');
     }
 
     public function commentAction()
     {
-        $twit = Twit::findOne($this->param('twit_id'));
+        $twit = $this->twitDao->findOne($this->param('twit_id'));
         if ($twit) {
             $args = $this->param(array('text', 'twit_id', 'role_id'));
             Comment::add($args);
-            $twit = Twit::findOne($args['twit_id']);
+            $twit = $this->twitDao->findOne($args['twit_id']);
             $this->comments = $twit->getComments();
             return $this->renderView('comment_list');
         } else {
@@ -35,7 +36,7 @@ class TwitController extends BaseController
 
     public function retweetAction()
     {
-        $twit = Twit::findOne($this->param('twit_id'));
+        $twit = $this->twitDao->findOne($this->param('twit_id'));
         if ($twit) {
             $args = $this->param(array('role_id', 'comment_id'));
             $rs = $twit->retweet($args);

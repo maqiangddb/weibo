@@ -26,7 +26,8 @@ class TwitDao extends IdDao {
         $t = $this->create();
         $t->role_id = $args['role_id'];
         $t->text = $args['text'];
-        $t->setExpr('created', 'NOW()');
+        $t->created = $this->now();
+        var_dump($t);
         $t->save();
 
         $log = $this->logModel->create();
@@ -43,7 +44,7 @@ class TwitDao extends IdDao {
         $t->role_id = $args['role_id'];
         $t->origin_id = $this->id;
         $t->origin_comment_id = $args['comment_id'];
-        $t->setExpr('created', 'NOW()');
+        $t->created = $this->now();
         $t->save();
 
         $log = $this->logModel->create();

@@ -16,7 +16,7 @@ class CommentDao extends IdDao {
         $c->role_id = $args['role_id'];
         $c->text = $args['text'];
         $c->twit_id = $args['twit_id'];
-        $c->setExpr('created', 'NOW()');
+        $c->created = $this->now();
         $c->save();
 
         $logModel = new LogModel;

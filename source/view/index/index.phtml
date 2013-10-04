@@ -8,24 +8,15 @@
 <div class="index">
   <?php if ($this->role) { ?>
   <div class="image-holder well"></div>
-  <div class="row-fluid">
+  <div class="row">
     <div class="span1">
-      <img class="img-polaroid" src="<?php echo $role_info['avatar'] ?>">
+      <img class="img-polaroid" src="<?php echo $this->role->avatar ?>">
     </div>
     <div class="span11">
-      <form action="twit" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="scene" value="<?php echo $scene_id; ?>" />
-        <input type="hidden" name="method" value="post" />
-        <div class="post-form clear-fix">
-          <textarea class="span12" name="text" placeholder="有什么需要表演的？"></textarea>
-          <input type="submit" class="btn btn-primary pull-right" value="发布" />
-          <div>
-            <label for="fileInput" class="btn"><i class="icon-picture"></i>图片</label>
-            <input type="hidden" name="image_src" >
-          </div>
-        </div>
+      <form action="/twit/" method="post">
+        <textarea class="span12" name="text" placeholder="有什么需要表演的？"></textarea>
+        <input type="submit" class="btn btn-primary" value="发布" />
       </form>
-      <input type="file" id="fileInput" name="image" data-url="/twit_pre_upload" />
     </div>
   </div>
   <?php } else { ?>

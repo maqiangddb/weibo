@@ -15,7 +15,7 @@ class Twit extends IdEntity {
         $commentDao = new CommentDao;
         return $commentDao
             ->where('twit_id', $this->id())
-            ->order(array('id' => 'ASC'))
+            ->orderBy(array('id' => 'ASC'))
             ->findMany();
     }
 
@@ -26,14 +26,16 @@ class Twit extends IdEntity {
     // override
     public static function make($model, $arr)
     {
-        $o = parent::makeEntity($model, $arr);
-        if ($o->origin) {
-            $o->orgin = $this->model->findOne($arr);
-        }
+        $o = parent::make($model, $arr);
+        if ($arr) {
+            if ($o->origin) {
+                $o->orgin = $this->model->findOne($arr);
+            }
 
-        $o->text = self::formatHtml($o->text);
-        $o->time = self::readableTime($o->time);
-        $o->comments = $o->getComments();
+            $o->text = self::formatHtml($o->text);
+            $o->time = self::readableTime($o->time);
+            $o->comments = $o->getComments();
+        }
         return $o;
     }
 
