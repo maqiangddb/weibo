@@ -16,7 +16,6 @@ class TwitController extends BaseController
             $args['ip'] = $this->ip();
             $this->twitDao->add($args);
         }
-        exit;
         $this->redirect('/');
     }
 

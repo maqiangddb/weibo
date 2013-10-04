@@ -9,7 +9,6 @@ class CommentDao extends IdDao {
 
     protected $table = 'comment';
 
-
     public function add ($args) {
 
         $c = $this->create();

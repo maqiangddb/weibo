@@ -27,10 +27,9 @@ class TwitDao extends IdDao {
         $t->role_id = $args['role_id'];
         $t->text = $args['text'];
         $t->created = $this->now();
-        var_dump($t);
         $t->save();
 
-        $log = $this->logModel->create();
+        $log = $this->logDao->create();
         $log->ip = $args['ip'];
         $log->role_id = $args['role_id'];
         $log->twit_id = $t->id;
@@ -63,15 +62,6 @@ class TwitDao extends IdDao {
             ->offset(($p-1)*$n)
             ->orderBy(array('role.id' => 'DESC'))
             ->findMany();
-
-        foreach($ret as $k => &$tw) {
-                if ($t['origin']) {
-                    $t['origin']['time'] = friendly_time2($t['origin']['time']);
-                }
-                $twit = new Twit($t['id']);
-                $t['can_up'] = $twit->canUpBy($user_id);
-                return $t;
-        }
         return $ret;
     }
 
