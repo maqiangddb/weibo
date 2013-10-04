@@ -1,6 +1,5 @@
 <?php
 /**
- * @file    role
  * @author  ryan <cumt.xiaochi@gmail.com>
  * @created Jul 17, 2012 10:06:36 AM
  */
@@ -28,8 +27,7 @@
         </a>
       </div>
       <div class="control">
-        <a href="<?php echo '/role/'.$role->id ?>" title="添加标签，修改角色头像，加V等">角色信息</a><!-- 删除 -->
-        <a class="switch" href="<?php echo '/role/'.$role->id ?>?method=play" title="扮演这个角色">以此身份登录</a>
+        <a class="switch" href="<?php echo '/role/'.$role->id ?>/play" title="扮演这个角色">以此身份登录</a>
       </div>
     </dd>
     <?php } ?>

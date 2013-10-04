@@ -11,6 +11,7 @@ return array(
         array('GET', '/role/', array('Role', 'index')),
         array('POST', '/role/', array('Role', 'add')),
         array('GET', '/role/[:id]', array('Role', 'view')),
+        array('GET', '/role/[:id]/play', array('Role', 'play')),
         array('GET', '/about', array('Index', 'about')),
     ),
 );
