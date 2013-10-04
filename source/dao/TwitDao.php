@@ -9,9 +9,17 @@ use ptf\IdModel;
  * @author  ryan <cumt.xiaochi@gmail.com>
  * @created Jul 17, 2012 3:15:17 PM
  */
-class TwitModel extends IdModel {
+class TwitDao extends IdModel {
 
     protected $table = 'twit';
+
+    protected $logModel;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->logModel = new LogModel;
+    }
 
     public function add ($args) {
 
@@ -21,24 +29,13 @@ class TwitModel extends IdModel {
         $t->setExpr('created', 'NOW()');
         $t->save();
 
-        $logModel = new LogModel;
-        $log = $logModel->create();
+        $log = $this->logModel->create();
         $log->ip = $args['ip'];
         $log->role_id = $args['role_id'];
         $log->twit_id = $t->id;
         $log->save();
-    }
 
-    public function getComments() {
-        $commentModel = new CommentModel;
-        return $commentModel
-            ->where('twit_id', $this->id())
-            ->order(array('id' => 'ASC'))
-            ->findMany();
-    }
-
-    public static function formatHtml($text) { // this should be private, but...
-        return preg_replace("/(@[^\s]+)(\sv)?($|\s)/", '[$1$2]', $text);
+        return $t;
     }
 
     public function retweet($args) {
@@ -49,7 +46,7 @@ class TwitModel extends IdModel {
         $t->setExpr('created', 'NOW()');
         $t->save();
 
-        $log = Log::create();
+        $log = $this->logModel->create();
         $log->ip = $args['ip'];
         $log->role_id = $args['role_id'];
         $log->twit_id = $t->id;
@@ -67,7 +64,6 @@ class TwitModel extends IdModel {
             ->findMany();
 
         foreach($ret as $k => &$tw) {
-            
                 if ($t['origin']) {
                     $t['origin']['time'] = friendly_time2($t['origin']['time']);
                 }
@@ -83,39 +79,5 @@ class TwitModel extends IdModel {
         return $this->count();
     }
 
-    // override
-    public function makeEntity($arr)
-    {
-        $o = parent::makeEntity($arr);
-        if ($o->origin) {
-            $o->orgin = self::findOne($arr);
-        }
-
-        $o->text = self::formatHtml($o->text);
-        $o->time = self::readableTime($o->time);
-        $o->comments = $o->getComments();
-        return $o;
-    }
-
-    /** translate Y-m-d to xx之前 or 今天XX
-     *
-     * @param type $date_time_str 形如 Y-m-d H:i:s （sql中获得的DateTime类型即可）
-     */
-    public function readableTime($date_time_str) {
-        $date_time = new DateTime($date_time_str);
-        $nowtime = new DateTime();
-        $diff = $nowtime->diff($date_time);
-        if ($diff->y==0 && $diff->m==0 && $diff->d==0) { // 同一天
-            if ($diff->h<1) // 一个小时以内
-                if ($diff->i==0) // 一分钟以内
-                    return '刚刚';
-                else
-                    return $diff->i.'分钟前'; // minutes
-            else
-                return '今天';
-        } else {
-            return current(explode(' ', $date_time_str));
-        }
-    }
 }
 

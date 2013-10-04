@@ -5,7 +5,7 @@ use ptf\IdModel;
 /**
  * @author  ryan <cumt.xiaochi@gmail.com>
  */
-class CommentModel extends IdModel {
+class CommentDao extends IdModel {
 
     protected $table = 'comment';
 
