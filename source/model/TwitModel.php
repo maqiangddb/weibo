@@ -9,19 +9,20 @@ use ptf\IdModel;
  * @author  ryan <cumt.xiaochi@gmail.com>
  * @created Jul 17, 2012 3:15:17 PM
  */
-class Twit extends IdModel {
+class TwitModel extends IdModel {
 
-    protected static $table = 'twit';
+    protected $table = 'twit';
 
     public function add ($args) {
 
-        $t = self::create();
+        $t = $this->create();
         $t->role_id = $args['role_id'];
         $t->text = $args['text'];
         $t->setExpr('created', 'NOW()');
         $t->save();
 
-        $log = Log::create();
+        $logModel = new LogModel;
+        $log = $logModel->create();
         $log->ip = $args['ip'];
         $log->role_id = $args['role_id'];
         $log->twit_id = $t->id;
@@ -29,7 +30,8 @@ class Twit extends IdModel {
     }
 
     public function getComments() {
-        return Comment::search()
+        $commentModel = new CommentModel;
+        return $commentModel
             ->where('twit_id', $this->id())
             ->order(array('id' => 'ASC'))
             ->findMany();
@@ -40,7 +42,7 @@ class Twit extends IdModel {
     }
 
     public function retweet($args) {
-        $t = self::create();
+        $t = $this->create();
         $t->role_id = $args['role_id'];
         $t->origin_id = $this->id;
         $t->origin_comment_id = $args['comment_id'];
@@ -57,7 +59,7 @@ class Twit extends IdModel {
     }
 
     public static function getListForIndex($n = 10, $p = 1) {
-        $ret = self::search()
+        $ret = $this
             ->join('role', array('role.id', 'twit.role_id'))
             ->limit($n)
             ->offset(($p-1)*$n)
@@ -78,12 +80,13 @@ class Twit extends IdModel {
 
     public static function getTotalCount()
     {
-        return self::search()->count();
+        return $this->count();
     }
 
-    public static function fromArray($arr)
+    // override
+    public static function makeEntity($arr)
     {
-        $o = parent::fromArray($arr);
+        $o = parent::makeEntity($arr);
         if ($o->origin) {
             $o->orgin = self::findOne($arr);
         }
