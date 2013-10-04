@@ -10,6 +10,15 @@ use ptf\PdoWrapper;
 
 class BaseController extends Controller
 {
+    protected $roleModel;
+    protected $twitModel;
+
+    public function __construct()
+    {
+        $this->roleModel = new RoleModel;
+        $this->twitModel = new TwitModel;
+    }
+
     public function init()
     {
         $this->page = new stdClass;
@@ -18,7 +27,8 @@ class BaseController extends Controller
 
         PdoWrapper::config($this->config['db']);
 
-        $this->role = Role::getCurrentRole();
+
+        $this->role = $this->roleModel->getCurrentRole();
 
         $this->layout('layout/master');
     }

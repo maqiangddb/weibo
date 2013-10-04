@@ -58,7 +58,7 @@ class TwitModel extends IdModel {
         return $t->id;
     }
 
-    public static function getListForIndex($n = 10, $p = 1) {
+    public function getListForIndex($n = 10, $p = 1) {
         $ret = $this
             ->join('role', array('role.id', 'twit.role_id'))
             ->limit($n)
@@ -78,13 +78,13 @@ class TwitModel extends IdModel {
         return $ret;
     }
 
-    public static function getTotalCount()
+    public function getTotalCount()
     {
         return $this->count();
     }
 
     // override
-    public static function makeEntity($arr)
+    public function makeEntity($arr)
     {
         $o = parent::makeEntity($arr);
         if ($o->origin) {
