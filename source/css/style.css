@@ -1,0 +1,67 @@
+/* all */
+.page-content {
+    background-color: #f0f0f0;
+}
+
+/* index */
+.index .post-box {
+    padding-top: 10px;
+    padding-bottom: 40px;
+}
+.index .post-box .left-col {
+    width: 60px;
+    float: left;
+    position: relative;
+}
+.index .post-box .mid-col {
+    margin-right: 70px;
+}
+.index .post-box .mid-col textarea {
+    height: 60px;
+}
+.index .post-box .right-col .btn {
+    float: right;
+    width: 60px;
+    height: 60px;
+    position: relative;
+}
+
+.index .post-box .right-col {
+    margin-left: 70px;
+}
+
+/* twit */
+.twit .left-col {
+    width: 60px;
+    position: relative;
+    float: left;
+}
+.twit .right-col {
+    margin-left: 70px;
+    background: #fff;
+    border-bottom: 1px solid #97bedd;
+    box-shadow: 0 1px 3px #849aa7;
+    margin-bottom: 20px;
+}
+.twit .name-bar {
+    padding: 6px;
+    padding-top: 8px;
+    padding-left: 14px;
+    border-bottom: 1px solid #c7c1c1;
+    background-color: #f6f4f4;
+}
+.twit .name-bar .name {
+    text-decoration: none;
+    font-weight: bold;
+}
+.twit .content {
+    padding: 10px;
+}
+.twit .content .text {
+    line-height: 170%;
+}
+.twit .control {
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
+

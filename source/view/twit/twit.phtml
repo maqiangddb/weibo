@@ -8,83 +8,77 @@
 ?>
 <li class="twit" data-id="<?php echo $this->twit->id; ?>" id="t<?php echo $this->twit->id ?>">
 
-  <div class="content">
+  <div class="left-col">
+    <a href="<?php echo '/role/'.$this->role->id; ?>">
+      <img class="img-thumbnail" title="" src="<?php echo $this->role->avatar; ?>" />
+    </a>
+  </div>
 
-    <div class="left-col">
-      <a href="<?php echo '/role/'.$this->role->id; ?>">
-        <img class="img-thumbnail" title="" src="<?php echo $this->role->avatar; ?>" />
-      </a>
+  <div class="right-col clearfix">
+
+    <div class="name-bar">
+      <a href="<?php echo '/role/'.$this->role->id; ?>" class="name"><?php echo $this->role->name; ?></a>
+      <span class="time label label-info pull-right"><?php echo $this->twit->created; ?></span>
+    </div>
+    
+    <div class="content">
+      <span class="text"><?php echo $this->twit->text; ?></span>
     </div>
 
-    <div class="right-col">
-
-      <div class="name-bar">
-        <a href="<?php echo '/role/'.$this->role->id; ?>" class=""><?php echo $this->twit->author; ?></a>
-        <span class="time label label-info pull-right"><?php echo $this->twit->created; ?></span>
+    <?php if (0 || $this->twit->origin): ?>
+    <div class="box-bg">
+      <div class="origin row-fluid">
+        <div class="avatar span1">
+          <a href="<?php echo '/role/'.$this->twit->origin['role_id']; ?>">
+            <img src="<?php echo $this->twit->origin['avatar']?:$config['default_avatar']; ?>" class="img-polaroid" />
+          </a>
+        </div>
+        <div class="span11">
+          <span class="time label pull-right"><?php echo $this->twit->origin['time']; ?></span>
+          <a href="<?php echo '/role/'.$this->twit->origin['role_id']; ?>">
+            <?php echo $this->twit->origin['author']; ?>
+          </a>
+          <?php if ($this->twit->origin['is_v']): ?>
+            <span class="verify">V</span>
+          <?php endif ?>
+          <span class="text"><?php echo $this->twit->origin['text']; ?></span>
+        </div>
+        <?php if ($this->twit->origin['image']): ?>
+          <div class="image row">
+            <img src="<?php echo $this->twit->origin['image']; ?>" class="img-polaroid" />
+          </div>
+        <?php endif ?>
+        <div class="control">
+            <span class="">转发(<?php echo $this->twit->origin['retweet_num']; ?>)</span>
+            <?php if (0) { ?><a class="">评论（<?php echo $this->twit->origin['comment_num']; ?>）</a><?php } ?>
+        </div>
       </div>
-      
-      <div class="content">
-        <span class="text"><?php echo $this->twit->text; ?></span>
-      </div>
+    </div>
+    <?php endif ?>
 
-      <?php if (0 || $this->twit->origin): ?>
-      <div class="box-bg">
-        <div class="origin row-fluid">
-          <div class="avatar span1">
-            <a href="<?php echo '/role/'.$this->twit->origin['role_id']; ?>">
-              <img src="<?php echo $this->twit->origin['avatar']?:$config['default_avatar']; ?>" class="img-polaroid" />
-            </a>
+    <div class="control pull-right">
+      <button type="button" class="btn btn-default">转发</button>
+      <button type="button" class="btn btn-default">评论</button>
+    </div>
+
+    <?php if ($this->role->id || $this->comments): ?>
+      <?php $this->renderBlock('twit/comments'); ?>
+    <?php endif ?>
+
+    <div class="retweet box-bg" style="display: none">
+      <div class="row-fluid">
+        <form class="retweet" method="post" action="<?php echo '/twit/'.$this->twit->id; ?>">
+          <div class="span1">
+            <img class="img-polaroid" src="<?php echo $this->twit->avatar; ?>" />
           </div>
           <div class="span11">
-            <span class="time label pull-right"><?php echo $this->twit->origin['time']; ?></span>
-            <a href="<?php echo '/role/'.$this->twit->origin['role_id']; ?>">
-              <?php echo $this->twit->origin['author']; ?>
-            </a>
-            <?php if ($this->twit->origin['is_v']): ?>
-              <span class="verify">V</span>
-            <?php endif ?>
-            <span class="text"><?php echo $this->twit->origin['text']; ?></span>
+            <textarea name="text" placeholder="说点什么吧" class="span12"></textarea>
           </div>
-          <?php if ($this->twit->origin['image']): ?>
-            <div class="image row">
-              <img src="<?php echo $this->twit->origin['image']; ?>" class="img-polaroid" />
-            </div>
-          <?php endif ?>
-          <div class="control">
-              <span class="">转发(<?php echo $this->twit->origin['retweet_num']; ?>)</span>
-              <?php if (0) { ?><a class="">评论（<?php echo $this->twit->origin['comment_num']; ?>）</a><?php } ?>
+          <input type="hidden" name="method" value="retweet" />
+          <div class="row">
+            <input type="submit" value="转发" class="btn pull-right" />
           </div>
-        </div>
-      </div>
-      <?php endif ?>
-
-      <div class="control">
-        <span class="retweet-btn-wrap">
-          <a class=" retweet-btn btn btn-link">转发</a>
-          <span>(<?php echo $this->twit->retweet_num; ?>)</span>
-        </span>
-        <span class="comment-btn">评论</span>
-      </div>
-
-      <?php if ($this->role->id || $this->comments): ?>
-        <?php $this->renderBlock('twit/comments'); ?>
-      <?php endif ?>
-
-      <div class="retweet box-bg" style="display: none">
-        <div class="row-fluid">
-          <form class="retweet" method="post" action="<?php echo '/twit/'.$this->twit->id; ?>">
-            <div class="span1">
-              <img class="img-polaroid" src="<?php echo $this->twit->avatar; ?>" />
-            </div>
-            <div class="span11">
-              <textarea name="text" placeholder="说点什么吧" class="span12"></textarea>
-            </div>
-            <input type="hidden" name="method" value="retweet" />
-            <div class="row">
-              <input type="submit" value="转发" class="btn pull-right" />
-            </div>
-          </form>
-        </div>
+        </form>
       </div>
     </div>
   </div>

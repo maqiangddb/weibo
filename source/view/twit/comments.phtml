@@ -7,17 +7,6 @@
 ?>
 <div class="twit">
   <div class="comment">
-    <?php if ($this->role->id) { ?>
-    <form action="?" method="post">
-        <div class="comment-form">
-            <input type="hidden" name="method" value="comment" />
-            <textarea name="text"></textarea>
-            <input type="submit" value="评论" class="btn" />
-        </div>
-    </form>
-    <?php } else { ?>
-    <div>先<a href="<?php echo '/role'; ?>">选择角色</a>再评论</div>
-    <?php } ?>
     <?php if (count($this->comments) == 0) { ?>
     <div>还没有评论，沙发空着呢</div>
     <?php } else { ?>

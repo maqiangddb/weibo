@@ -6,24 +6,25 @@
  */
 ?>
 <div class="index">
-  <?php if ($this->role) { ?>
-  <div class="image-holder well"></div>
-  <div class="row">
-    <div class="col-md-1">
-      <img class="img-polaroid" src="<?php echo $this->role->avatar ?>">
+  <?php if ($this->role): ?>
+  <div class="post-box col-md-10 col-md-offset-1">
+    <div class="left-col">
+      <img class="img-thumbnail" src="<?php echo $this->role->avatar ?>">
     </div>
-    <div class="col-md-11">
+    <div class="right-col">
       <form action="/twit/" method="post">
-        <textarea class="col-md-12" name="text" placeholder="有什么需要表演的？"></textarea>
         <input type="submit" class="btn btn-primary" value="发布" />
+        <div class="mid-col">
+          <textarea class="form-control" name="text" placeholder="有什么需要表演的？"></textarea>
+        </div>
       </form>
     </div>
   </div>
-  <?php } else { ?>
+  <?php else: ?>
   <div class="choose">请首先<a href="/role/">选择一个角色</a>，开始在伪博扮演的旅程吧</div>
-  <?php } ?>
-  <div class="scene-twit row">
-    <ul class="twit col-md-10 col-md-offset-1 list-unstyled">
+  <?php endif; ?>
+  <div class="twit-list-div">
+    <ul class="twit-list-ul col-md-10 col-md-offset-1 list-unstyled">
     <?php foreach ($this->twits as $t) { ?>
       <?php $this->renderBlock('twit/twit', array('twit' => $t, 'role' => $t->getRole(), 'comments' => $t->getComments())); ?>
     <?php } ?>
