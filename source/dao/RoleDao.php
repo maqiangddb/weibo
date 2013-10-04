@@ -51,6 +51,7 @@ class RoleDao extends IdDao {
     {
         $role = $this->create();
         $role->name = $args['name'];
+        $role->avatar = '/img/default_avatar.png';
         $role->save();
         return $role;
     }

@@ -9,7 +9,8 @@ class RoleController extends BaseController
 {
     public function indexAction()
     {
-        list($p, $n) = $this->param('p', 'n');
+        $p = $this->param('p', 1);
+        $n = $this->param('n', 100);
         $this->roles = $this->roleDao->getList($n, $p);
         $this->renderView('role/index');
     }
