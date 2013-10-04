@@ -12,8 +12,8 @@ use ptf\IdEntity;
 class Twit extends IdEntity {
 
     public function getComments() {
-        $commentModel = new CommentModel;
-        return $commentModel
+        $commentDao = new CommentDao;
+        return $commentDao
             ->where('twit_id', $this->id())
             ->order(array('id' => 'ASC'))
             ->findMany();

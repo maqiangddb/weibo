@@ -1,11 +1,11 @@
 <?php
 
-use ptf\IdModel;
+use ptf\IdDao;
 
 /**
  * @author  ryan <cumt.xiaochi@gmail.com>
  */
-class CommentDao extends IdModel {
+class CommentDao extends IdDao {
 
     protected $table = 'comment';
 

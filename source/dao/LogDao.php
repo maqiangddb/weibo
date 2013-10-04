@@ -1,10 +1,10 @@
 <?php
 
-use ptf\IdModel;
+use ptf\IdDao;
 
 /**
  * @author  ryan <cumt.xiaochi@gmail.com>
  */
-class LogDao extends IdModel {
+class LogDao extends IdDao {
     public $table = 'log';
 }

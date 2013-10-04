@@ -1,6 +1,6 @@
 <?php
 
-use ptf\IdModel;
+use ptf\IdDao;
 
 /**
  * Description of Role
@@ -9,7 +9,7 @@ use ptf\IdModel;
  * @author  ryan <cumt.xiaochi@gmail.com>
  * @created Jul 17, 2012 10:13:11 AM
  */
-class RoleDao extends IdModel {
+class RoleDao extends IdDao {
 
     public $table = 'role';
 

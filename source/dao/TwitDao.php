@@ -1,6 +1,6 @@
 <?php
 
-use ptf\IdModel;
+use ptf\IdDao;
 
 /**
  * Description of Twit
@@ -9,16 +9,16 @@ use ptf\IdModel;
  * @author  ryan <cumt.xiaochi@gmail.com>
  * @created Jul 17, 2012 3:15:17 PM
  */
-class TwitDao extends IdModel {
+class TwitDao extends IdDao {
 
     protected $table = 'twit';
 
-    protected $logModel;
+    protected $logDao;
 
     public function __construct()
     {
         parent::__construct();
-        $this->logModel = new LogModel;
+        $this->logDao = new LogDao;
     }
 
     public function add ($args) {

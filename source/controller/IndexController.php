@@ -14,9 +14,9 @@ class IndexController extends BaseController
     {
         $p = $this->param('p', 1);
         $n = $this->param('n', 100);
-        $this->twits = $this->twitModel->getListForIndex($n, $p);
-        $this->role = $this->roleModel->getCurrentRole();
-        $total = $this->twitModel->getTotalCount();
+        $this->twits = $this->twitDao->getListForIndex($n, $p);
+        $this->role = $this->roleDao->getCurrentRole();
+        $total = $this->twitDao->getTotalCount();
         $this->paginate = new Paginate($n, $total);
         $this->renderView('index/index');
     }

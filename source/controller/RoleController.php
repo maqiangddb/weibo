@@ -10,7 +10,7 @@ class RoleController extends BaseController
     public function indexAction()
     {
         list($p, $n) = $this->param('p', 'n');
-        $this->roles = Role::getList($n, $p);
+        $this->roles = $this->roleDao->getList($n, $p);
         $this->renderView('role/index');
     }
 
@@ -18,17 +18,17 @@ class RoleController extends BaseController
     {
         $name = $this->param('name');
         if ($name) {
-            if ($role = Role::hasName($name)) {
+            if ($role = $this->roleDao->hasName($name)) {
                 $this->redirect('/role/'.$role->id);
             }
-            $role = Role::add($this->param(array('name')));
+            $role = $this->roleDao->add($this->param(array('name')));
             $this->redirect('/role/' . $role->id);
         }
     }
 
     public function playAction()
     {
-        $role = Role::findOne($this->id);
+        $role = $this->roleDao->findOne($this->id);
         if ($role) {
             $role->play();
         }
@@ -37,7 +37,7 @@ class RoleController extends BaseController
 
     public function editAction()
     {
-        $role = Role::findOne($this->id);
+        $role = $this->roleDao->findOne($this->id);
         if ($role) {
             $params = $this->param(array('avatar'));
             $role->set($params);
@@ -49,7 +49,7 @@ class RoleController extends BaseController
 
     public function viewAction()
     {
-        $this->role = Role::findOne($this->id);
+        $this->role = $this->roleDao->findOne($this->id);
         $this->renderView();
     }
 }
