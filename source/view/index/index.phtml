@@ -25,7 +25,7 @@
   <div class="scene-twit row-fluid">
       <ul class="twit span10">
       <?php foreach ($this->twits as $t) { ?>
-        <?php include $this->renderView('twit/twit'); ?>
+        <?php include $this->renderBlock('twit/twit', array('t' => $t, 'comments' => $t->getComments())); ?>
       <?php } ?>
       </ul>
   </div>

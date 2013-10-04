@@ -1,0 +1,39 @@
+<?php
+/**
+ * @file    twit
+ * @author  ryan <cumt.xiaochi@gmail.com>
+ * @created Jul 17, 2012 4:38:13 PM
+ */
+?>
+<div class="twit">
+
+  <div class="comment">
+    <?php if ($this->role->id) { ?>
+    <form action="?" method="post">
+        <div class="comment-form">
+            <input type="hidden" name="method" value="comment" />
+            <textarea name="text"></textarea>
+            <input type="submit" value="评论" class="btn" />
+        </div>
+    </form>
+    <?php } else { ?>
+    <div>先<a href="<?php echo '/role'; ?>">选择角色</a>再评论</div>
+    <?php } ?>
+    <?php if (count($this->comments) == 0) { ?>
+    <div>还没有评论，沙发空着呢</div>
+    <?php } else { ?>
+    <ul class="comment">
+    <?php foreach ($this->comments as $c) { ?>
+      <li class="comment">
+        <a href="<?php echo '/role/'.$c->role_id; ?>">
+            <img src="<?php echo $c->avatar?:$config['default_avatar']; ?>" />
+            <span><?php echo $c->author; ?></span>
+        </a>
+        <span>：<?php echo $c->text; ?></span>
+      </li>
+    <?php } ?>
+    </ul>
+    <?php } ?>
+  </div>
+</div>
+
