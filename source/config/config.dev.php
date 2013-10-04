@@ -6,5 +6,6 @@ return array(
         'username' => 'root',
         'password' => 'root',
         'debug' => true,
+        'logging' => true,
     )
 );

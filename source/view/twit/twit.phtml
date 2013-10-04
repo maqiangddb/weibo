@@ -6,6 +6,7 @@
  */
 ?>
 <div class="twit">
+  <?php echo $this->twit->text ?>
 
   <div class="comment">
     <?php if ($this->role->id) { ?>
@@ -26,8 +27,8 @@
     <?php foreach ($this->comments as $c) { ?>
       <li class="comment">
         <a href="<?php echo '/role/'.$c->role_id; ?>">
-            <img src="<?php echo $c->avatar?:$config['default_avatar']; ?>" />
-            <span><?php echo $c->author; ?></span>
+          <img src="<?php echo $c->avatar ?>" />
+          <span><?php echo $c->author; ?></span>
         </a>
         <span>：<?php echo $c->text; ?></span>
       </li>

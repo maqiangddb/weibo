@@ -57,10 +57,9 @@ class TwitDao extends IdDao {
 
     public function getListForIndex($n = 10, $p = 1) {
         $ret = $this
-            ->join('role', array('role.id', 'twit.role_id'))
             ->limit($n)
             ->offset(($p-1)*$n)
-            ->orderBy(array('role.id' => 'DESC'))
+            ->orderBy(array('id' => 'DESC'))
             ->findMany();
         return $ret;
     }

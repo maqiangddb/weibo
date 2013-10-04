@@ -34,7 +34,6 @@ class Twit extends IdEntity {
 
             $o->text = self::formatHtml($o->text);
             $o->time = self::readableTime($o->time);
-            $o->comments = $o->getComments();
         }
         return $o;
     }

@@ -23,11 +23,11 @@
   <div class="choose">请首先<a href="/role/">选择一个角色</a>，开始在伪博扮演的旅程吧</div>
   <?php } ?>
   <div class="scene-twit row-fluid">
-      <ul class="twit span10">
-      <?php foreach ($this->twits as $t) { ?>
-        <?php include $this->renderBlock('twit/twit', array('t' => $t, 'comments' => $t->getComments())); ?>
-      <?php } ?>
-      </ul>
+    <ul class="twit span10">
+    <?php foreach ($this->twits as $t) { ?>
+      <?php $this->renderBlock('twit/twit', array('twit' => $t, 'comments' => $t->getComments())); ?>
+    <?php } ?>
+    </ul>
   </div>
   <div class="paginate">
     <?php if ($this->paginate->hasPrevious()) { ?><a href="<?php echo '?offset='.$this->paginate->previousOffset(); ?>">上一页</a><?php } ?>
