@@ -11,6 +11,12 @@ use ptf\IdEntity;
  */
 class Twit extends IdEntity {
 
+    public function getRole()
+    {
+        $roleDao = new RoleDao;
+        return $roleDao->findOne($this->role_id);
+    }
+
     public function getComments() {
         $commentDao = new CommentDao;
         return $commentDao
