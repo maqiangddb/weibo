@@ -1,6 +1,5 @@
 <?php
 /**
- * @file    master
  * @author  ryan <cumt.xiaochi@gmail.com>
  */
 ?>
@@ -9,8 +8,6 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>伪博扮演</title>
-    <meta name="description" content="<?php echo $this->page->description; ?>" />
-    <meta name="keywords" content="<?php echo implode(', ', $this->page->keywords); ?>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
@@ -18,20 +15,12 @@
 
   </head>
   <body>
-    <div class="append-parent"><!-- append parent -->
-    </div>
     <div class="header"><!-- head -->
       <?php $this->renderBlock('block/header'); ?>
     </div>
     <div class="page-content clearfix">
       <?php $this->yieldView(); ?>
     </div>
-    <div class="footer"><!-- footer -->
-      <?php $this->renderBlock('block/footer'); ?>
-    </div>
-
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-2.0.3.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
     <?php if (DEPLOY_ENV == 'prd'): ?>
     <script type="text/javascript">
