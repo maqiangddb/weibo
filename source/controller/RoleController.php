@@ -4,7 +4,6 @@
  * @author  ryan <cumt.xiaochi@gmail.com>
  * @created Jul 17, 2012 10:04:46 AM
  */
-
 class RoleController extends BaseController
 {
     public function indexAction()
@@ -51,7 +50,7 @@ class RoleController extends BaseController
     public function viewAction()
     {
         $this->role = $this->roleDao->findOne($this->id);
-        $this->renderView();
+        $this->renderView('role/view');
     }
 }
 

@@ -9,6 +9,7 @@ class Page404Controller extends BaseController
 {
     public function indexAction()
     {
-        $this->show_footer = 0;
+        $this->layout('layout/simple');
+        $this->showView('index/page404');
     }
 }

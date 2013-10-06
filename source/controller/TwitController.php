@@ -27,7 +27,7 @@ class TwitController extends BaseController
             Comment::add($args);
             $twit = $this->twitDao->findOne($args['twit_id']);
             $this->comments = $twit->getComments();
-            return $this->renderView('comment_list');
+            return $this->renderBlock('comment_list');
         } else {
             return false;
         }
